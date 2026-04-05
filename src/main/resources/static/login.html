@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - TravelMate</title>
+    <link rel="stylesheet" href="/css/popup-styles.css" />
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background: url("/images/login.jpg.jpg") no-repeat center
+          center/cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 30px 40px;
+        border-radius: 15px;
+        width: 350px;
+        color: black;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      .logo {
+        text-align: center;
+        color: #008080;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .tagline {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 14px;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #333;
+      }
+
+      label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+        font-size: 14px;
+        color: #333;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 8px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #008080;
+      }
+
+      .login-btn {
+        display: block;
+        text-align: center;
+        padding: 12px;
+        margin-top: 20px;
+        background: #008080;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.3s;
+      }
+
+      .login-btn:hover {
+        background: #006666;
+      }
+
+      .error-message {
+        background: #ffebee;
+        color: #c62828;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 15px;
+        display: none;
+        text-align: center;
+        border: 1px solid #ef5350;
+      }
+
+      .success-message {
+        background: #e8f5e8;
+        color: #2e7d32;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 15px;
+        display: none;
+        text-align: center;
+        border: 1px solid #4caf50;
+      }
+
+      p {
+        text-align: center;
+        margin-top: 20px;
+        color: #666;
+      }
+
+      a {
+        color: #008080;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .forgot-password {
+        text-align: center;
+        margin-top: 15px;
+      }
+
+      .forgot-password a {
+        color: #666;
+        font-size: 14px;
+      }
+
+      .back-home {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .back-home a {
+        color: #008080;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">TravelMate</div>
+      <div class="tagline">Your Ultimate Travel Companion</div>
+
+      <h2>Welcome Back!</h2>
+
+      <form id="loginForm">
+        <label for="userid">Email or Username</label>
+        <input
+          type="text"
+          id="userid"
+          placeholder="Enter your email or username"
+          required
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+          required
+        />
+
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+
+        <button type="submit" class="login-btn">Login</button>
+      </form>
+
+      <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+
+      <div class="back-home">
+        <a href="getstart.html">← Back to Home</a>
+      </div>
+    </div>
+
+    <script src="/js/popup-manager.js"></script>
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const userid = document.getElementById("userid").value.trim();
+          const password = document.getElementById("password").value;
+          const errorDiv = document.getElementById("errorMessage");
+          const successDiv = document.getElementById("successMessage");
+
+          errorDiv.style.display = "none";
+          successDiv.style.display = "none";
+
+          if (!userid || !password) {
+            showError("Please fill in all fields");
+            return;
+          }
+
+          try {
+            const response = await fetch("http://localhost:8080/api/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                userid: userid,
+                password: password,
+              }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+              showErrorPopup(
+                "Login Failed",
+                data.error || "Account not found or password is incorrect."
+              );
+              return;
+            }
+
+            localStorage.setItem("user", JSON.stringify(data.user));
+
+            setTimeout(() => {
+              window.location.href = "main.html";
+            }, 1500);
+          } catch (error) {
+            console.error("Login error:", error);
+            showErrorPopup(
+              "Server Error",
+              "Unable to reach the server. Please try again."
+            );
+          }
+        });
+
+      function showError(message) {
+        const errorDiv = document.getElementById("errorMessage");
+        errorDiv.textContent = message;
+        errorDiv.style.display = "block";
+      }
+
+      function showSuccess(message) {
+        const successDiv = document.getElementById("successMessage");
+        successDiv.textContent = message;
+        successDiv.style.display = "block";
+      }
+
+      function forgotPassword() {
+        popupManager.createPopup({
+          icon: "🔑",
+          title: "Reset Password",
+          message:
+            "Please enter your email address to receive password reset instructions:",
+          buttons: [
+            {
+              text: "Cancel",
+              class: "popup-btn-secondary",
+            },
+            {
+              text: "Send Reset Link",
+              class: "popup-btn-primary",
+              action: () => {
+                const email = prompt("Please enter your email address:");
+                if (email) {
+                  showSuccessPopup(
+                    "Password Reset",
+                    "Password reset instructions have been sent to your email address."
+                  );
+                }
+              },
+            },
+          ],
+        });
+      }
+    </script>
+  </body>
+</html>

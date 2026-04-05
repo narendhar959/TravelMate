@@ -1,0 +1,263 @@
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.popup-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-modal {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transform: scale(0.7) translateY(50px);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.popup-overlay.show .popup-modal {
+  transform: scale(1) translateY(0);
+}
+
+.popup-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.popup-close:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.popup-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.popup-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.popup-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #008080;
+  margin: 0 0 10px 0;
+}
+
+.popup-subtitle {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+}
+
+.popup-content {
+  margin-bottom: 30px;
+}
+
+.popup-details {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.detail-label {
+  font-weight: bold;
+  color: #555;
+}
+
+.detail-value {
+  color: #333;
+  text-align: right;
+}
+
+.popup-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.popup-btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  min-width: 120px;
+}
+
+.popup-btn-primary {
+  background: linear-gradient(45deg, #008080, #00a0a0);
+  color: white;
+}
+
+.popup-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 128, 128, 0.3);
+}
+
+.popup-btn-secondary {
+  background: #f8f9fa;
+  color: #666;
+  border: 2px solid #ddd;
+}
+
+.popup-btn-secondary:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.popup-btn-success {
+  background: linear-gradient(45deg, #28a745, #34ce57);
+  color: white;
+}
+
+.popup-btn-success:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+/* Success Animation */
+.success-checkmark {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 3;
+  stroke: #28a745;
+  stroke-miterlimit: 10;
+  margin: 10px auto;
+  box-shadow: inset 0px 0px 0px #28a745;
+  animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.success-checkmark-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 3;
+  stroke-miterlimit: 10;
+  stroke: #28a745;
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.success-checkmark-check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #28a745;
+  }
+}
+
+/* Loading Animation */
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #008080;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .popup-modal {
+    padding: 30px 20px;
+    margin: 20px;
+  }
+  
+  .popup-actions {
+    flex-direction: column;
+  }
+  
+  .popup-btn {
+    width: 100%;
+  }
+  
+  .detail-row {
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .detail-value {
+    text-align: left;
+    font-weight: bold;
+  }
+}

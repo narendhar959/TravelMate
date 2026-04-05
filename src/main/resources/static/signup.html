@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - TravelMate</title>
+    <link rel="stylesheet" href="/css/popup-styles.css" />
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-color: #e8d7bb;
+        background-image: url("/images/bg.jpg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        z-index: -1;
+      }
+
+      .container {
+        background: white;
+        padding: 30px 40px;
+        border-radius: 15px;
+        width: 100%;
+        max-width: 400px;
+        color: black;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .logo {
+        text-align: center;
+        color: #008080;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .tagline {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 14px;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #333;
+      }
+
+      label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+        font-size: 14px;
+        color: #333;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 12px;
+        margin-top: 8px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #008080;
+      }
+
+      .form-row {
+        display: flex;
+        gap: 15px;
+      }
+
+      .form-group {
+        flex: 1;
+      }
+
+      .error-message {
+        background: #ffebee;
+        color: #c62828;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 15px;
+        display: none;
+        text-align: center;
+        border: 1px solid #ef5350;
+        font-size: 14px;
+      }
+
+      .success-message {
+        background: #e8f5e8;
+        color: #2e7d32;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 15px;
+        display: none;
+        text-align: center;
+        border: 1px solid #4caf50;
+        font-size: 14px;
+      }
+
+      .signup-btn {
+        width: 100%;
+        padding: 12px;
+        margin-top: 20px;
+        background: #008080;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .signup-btn:hover {
+        background: #006666;
+      }
+
+      .signup-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+
+      .otp-section {
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+      }
+
+      .otp-input {
+        text-align: center;
+        font-size: 18px;
+        letter-spacing: 5px;
+        font-weight: bold;
+      }
+
+      .resend-otp {
+        color: #008080;
+        cursor: pointer;
+        text-decoration: underline;
+        font-size: 14px;
+        margin-top: 10px;
+        display: inline-block;
+      }
+
+      p {
+        text-align: center;
+        margin-top: 20px;
+        color: #666;
+      }
+
+      a {
+        color: #008080;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .back-home {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .back-home a {
+        color: #008080;
+        font-size: 14px;
+      }
+
+      .password-strength {
+        margin-top: 5px;
+        font-size: 12px;
+      }
+
+      .strength-weak {
+        color: #f44336;
+      }
+      .strength-medium {
+        color: #ff9800;
+      }
+      .strength-strong {
+        color: #4caf50;
+      }
+
+      .otp-hint {
+        background: #e3f2fd;
+        color: #1565c0;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+        font-size: 12px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">TravelMate</div>
+      <div class="tagline">Join the Travel Revolution</div>
+
+      <h2>Create Account</h2>
+
+      <form id="signupForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input
+              type="text"
+              id="firstname"
+              placeholder="Enter first name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input
+              type="text"
+              id="lastname"
+              placeholder="Enter last name"
+              required
+            />
+          </div>
+        </div>
+
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              placeholder="Enter phone number"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" required>
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+              <option value="prefer-not-to-say">Prefer not to say</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" required />
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input
+              type="text"
+              id="city"
+              placeholder="Enter your city"
+              required
+            />
+          </div>
+        </div>
+
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          placeholder="Choose a username"
+          required
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Choose a strong password"
+          required
+        />
+        <div id="passwordStrength" class="password-strength"></div>
+
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          placeholder="Confirm your password"
+          required
+        />
+
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+
+        <button type="submit" class="signup-btn" id="signupBtn">
+          Send OTP
+        </button>
+      </form>
+
+      <div class="otp-section" id="otpSection">
+        <h3 style="text-align: center; color: #008080; margin-bottom: 15px">
+          Verify Your Email
+        </h3>
+        <p style="text-align: center; margin-bottom: 15px; font-size: 14px">
+          We've sent a 6-digit OTP to your email address
+        </p>
+        <input
+          type="text"
+          id="otpInput"
+          class="otp-input"
+          placeholder="Enter OTP"
+          maxlength="6"
+        />
+        <div style="text-align: center; margin-top: 15px">
+          <button type="button" class="signup-btn" onclick="verifyOTP()">
+            Verify & Create Account
+          </button>
+        </div>
+        <div style="text-align: center; margin-top: 10px">
+          <span class="resend-otp" onclick="resendOTP()">Resend OTP</span>
+        </div>
+      </div>
+
+      <p>Already have an account? <a href="login.html">Login here</a></p>
+
+      <div class="back-home">
+        <a href="getstart.html">← Back to Home</a>
+      </div>
+    </div>
+
+    <script src="/js/popup-manager.js"></script>
+    <script>
+      let generatedOTP = "";
+      let formData = {};
+
+      document
+        .getElementById("password")
+        .addEventListener("input", function () {
+          const password = this.value;
+          const strengthDiv = document.getElementById("passwordStrength");
+
+          if (password.length === 0) {
+            strengthDiv.textContent = "";
+            return;
+          }
+
+          let strength = 0;
+          if (password.length >= 8) strength++;
+          if (/[a-z]/.test(password)) strength++;
+          if (/[A-Z]/.test(password)) strength++;
+          if (/[0-9]/.test(password)) strength++;
+          if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+          if (strength < 3) {
+            strengthDiv.textContent = "Weak password";
+            strengthDiv.className = "password-strength strength-weak";
+          } else if (strength < 5) {
+            strengthDiv.textContent = "Medium strength";
+            strengthDiv.className = "password-strength strength-medium";
+          } else {
+            strengthDiv.textContent = "Strong password";
+            strengthDiv.className = "password-strength strength-strong";
+          }
+        });
+
+      document
+        .getElementById("signupForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const errorDiv = document.getElementById("errorMessage");
+          const successDiv = document.getElementById("successMessage");
+
+          errorDiv.style.display = "none";
+          successDiv.style.display = "none";
+
+          formData = {
+            firstname: document.getElementById("firstname").value.trim(),
+            lastname: document.getElementById("lastname").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            phone: document.getElementById("phone").value.trim(),
+            gender: document.getElementById("gender").value,
+            dob: document.getElementById("dob").value,
+            city: document.getElementById("city").value.trim(),
+            username: document.getElementById("username").value.trim(),
+            password: document.getElementById("password").value,
+            confirmPassword: document.getElementById("confirmPassword").value,
+          };
+
+          if (!validateForm()) return;
+
+          sendOTP();
+        });
+
+      function validateForm() {
+        const {
+          firstname,
+          lastname,
+          email,
+          phone,
+          gender,
+          dob,
+          city,
+          username,
+          password,
+          confirmPassword,
+        } = formData;
+
+        if (
+          !firstname ||
+          !lastname ||
+          !email ||
+          !phone ||
+          !gender ||
+          !dob ||
+          !city ||
+          !username ||
+          !password ||
+          !confirmPassword
+        ) {
+          showErrorPopup("Validation Error", "Please fill in all fields");
+          return false;
+        }
+
+        const phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(phone.replace(/\D/g, ""))) {
+          showErrorPopup(
+            "Invalid Phone",
+            "Please enter a valid 10-digit phone number"
+          );
+          return false;
+        }
+
+        const birthDate = new Date(dob);
+        const today = new Date();
+        const age = today.getFullYear() - birthDate.getFullYear();
+        if (age < 13) {
+          showErrorPopup(
+            "Age Restriction",
+            "You must be at least 13 years old to create an account"
+          );
+          return false;
+        }
+
+        if (username.length < 3) {
+          showErrorPopup(
+            "Invalid Username",
+            "Username must be at least 3 characters long"
+          );
+          return false;
+        }
+
+        if (password.length < 8) {
+          showErrorPopup(
+            "Weak Password",
+            "Password must be at least 8 characters long"
+          );
+          return false;
+        }
+
+        if (password !== confirmPassword) {
+          showErrorPopup("Password Mismatch", "Passwords do not match");
+          return false;
+        }
+
+        return true;
+      }
+
+     async function sendOTP() {
+  const btn = document.getElementById("signupBtn");
+  btn.textContent = "Sending OTP...";
+  btn.disabled = true;
+
+  try {
+    const response = await fetch("http://localhost:8080/api/send-otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: formData.email })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      document.getElementById("otpSection").style.display = "block";
+      btn.textContent = "OTP Sent ✓";
+      showSuccessPopup("OTP Sent", `A 6-digit OTP has been sent to ${formData.email}. Check your inbox.`);
+      setTimeout(() => { document.getElementById("otpInput").focus(); }, 100);
+    } else {
+      btn.textContent = "Send OTP";
+      btn.disabled = false;
+      showErrorPopup("Failed", data.error || "Could not send OTP");
+    }
+
+  } catch (err) {
+    btn.textContent = "Send OTP";
+    btn.disabled = false;
+    showErrorPopup("Error", "Cannot reach server. Make sure Spring Boot is running.");
+  }
+}
+
+      async function verifyOTP() {
+  const enteredOTP = document.getElementById("otpInput").value.trim();
+
+  if (!enteredOTP || enteredOTP.length !== 6) {
+    showErrorPopup("Invalid OTP", "Please enter the 6-digit OTP sent to your email.");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:8080/api/verify-otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: formData.email, otp: enteredOTP })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      // OTP correct — now create the account
+      await createAccount();
+    } else {
+      showErrorPopup("Wrong OTP", data.error || "OTP verification failed.");
+    }
+
+  } catch (err) {
+    showErrorPopup("Error", "Cannot reach server. Make sure Spring Boot is running.");
+  }
+}
+
+     async function createAccount() {
+  try {
+    showLoadingPopup("Creating Account", "Please wait…");
+
+    const response = await fetch("http://localhost:8080/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        firstname: formData.firstname,
+        lastname: formData.lastname,
+        username: formData.username,
+        email: formData.email,
+        phone: formData.phone,
+        gender: formData.gender.replace(/-/g, "_"),
+        dob: formData.dob,
+        city: formData.city,
+        password: formData.password
+      })
+    });
+
+    const data = await response.json();
+    closePopup();
+
+    if (response.ok) {
+    	localStorage.setItem("user", JSON.stringify(data.user));
+      showSuccessPopup("Account Created", "Welcome to TravelMate!");
+
+      setTimeout(() => {
+        window.location.href = "main.html";
+      }, 2000);
+
+    } else {
+      showErrorPopup("Signup Failed", data.error || "Something went wrong");
+    }
+
+  } catch (err) {
+  console.error("FULL ERROR:", err); // 🔥 ADD THIS
+  closePopup();
+  showErrorPopup("Error", "Server not reachable");
+}
+}
+  // ─────────────────────────────────────────────────────────────────────────
+ 
+ function resendOTP() {
+  document.getElementById("signupBtn").textContent = "Send OTP";
+  document.getElementById("signupBtn").disabled = false;
+  sendOTP();
+}
+ 
+  // Set max date of birth (must be 13+)
+  const maxDOB = new Date();
+  maxDOB.setFullYear(maxDOB.getFullYear() - 13);
+  document.getElementById("dob").max = maxDOB.toISOString().split("T")[0];
+    </script>
+  </body>
+</html>

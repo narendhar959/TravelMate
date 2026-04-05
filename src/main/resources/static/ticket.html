@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelMate - Booking Ticket</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #e3f2fd 0%, #f8f9fa 100%);
+      min-height: 100vh;
+    }
+
+    .header {
+      background: #008080;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .ticket-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ticket-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(45deg, #008080, #00a0a0);
+    }
+
+    .ticket-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px dashed #ddd;
+    }
+
+    .service-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .service-icon {
+      font-size: 48px;
+      color: #008080;
+    }
+
+    .service-details h2 {
+      margin: 0;
+      color: #008080;
+      font-size: 24px;
+    }
+
+    .service-details p {
+      margin: 5px 0 0 0;
+      color: #666;
+    }
+
+    .booking-status {
+      background: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+    }
+
+    .ticket-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .ticket-section h3 {
+      color: #008080;
+      margin-bottom: 15px;
+      font-size: 18px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding: 8px 0;
+    }
+
+    .info-label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .info-value {
+      color: #333;
+    }
+
+    .route-section {
+      grid-column: 1 / -1;
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .route-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .route-arrow {
+      color: #008080;
+      font-size: 24px;
+    }
+
+    .qr-code {
+      text-align: center;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .qr-placeholder {
+      width: 150px;
+      height: 150px;
+      background: #ddd;
+      margin: 0 auto 10px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: #666;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: #008080;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #006666;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #545b62;
+      transform: translateY(-2px);
+    }
+
+    .important-info {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 20px;
+    }
+
+    .important-info h4 {
+      color: #856404;
+      margin: 0 0 10px 0;
+    }
+
+    .important-info ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #856404;
+    }
+
+    @media (max-width: 768px) {
+      .ticket-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="main.html" class="back-btn">← Back</a>
+    <h1>🎫 Your Booking Ticket</h1>
+    <p>Booking confirmed successfully</p>
+  </div>
+
+  <div class="container">
+    <div class="ticket-card" id="ticket-card">
+      <div class="ticket-header">
+        <div class="service-info">
+          <div class="service-icon" id="service-icon">✈️</div>
+          <div class="service-details">
+            <h2 id="service-title">Flight Booking</h2>
+            <p id="service-subtitle">Domestic Flight</p>
+          </div>
+        </div>
+        <div class="booking-status">CONFIRMED</div>
+      </div>
+
+      <div class="route-section">
+        <div class="route-display">
+          <span id="route-from">Mumbai</span>
+          <span class="route-arrow" id="route-arrow">✈️</span>
+          <span id="route-to">Delhi</span>
+        </div>
+      </div>
+
+      <div class="ticket-content">
+        <div class="ticket-section">
+          <h3>Booking Details</h3>
+          <div class="info-row">
+            <span class="info-label">Booking ID:</span>
+            <span class="info-value" id="booking-id">BK123456789</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Passenger Name:</span>
+            <span class="info-value" id="passenger-name">John Doe</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Travel Date:</span>
+            <span class="info-value" id="travel-date">March 15, 2025</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Booking Date:</span>
+            <span class="info-value" id="booking-date">March 10, 2025</span>
+          </div>
+        </div>
+
+        <div class="ticket-section">
+          <h3>Journey Details</h3>
+          <div class="info-row">
+            <span class="info-label" id="time-label">Departure:</span>
+            <span class="info-value" id="departure-time">06:00 AM</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label" id="arrival-label">Arrival:</span>
+            <span class="info-value" id="arrival-time">08:30 AM</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label" id="duration-label">Duration:</span>
+            <span class="info-value" id="duration">2h 30m</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Total Amount:</span>
+            <span class="info-value" id="total-amount" style="color: #28a745; font-weight: bold;">₹4,500</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="qr-code">
+        <div class="qr-placeholder">📱</div>
+        <p><strong>Scan QR Code</strong></p>
+        <p style="color: #666; font-size: 14px;">Show this code at check-in</p>
+      </div>
+
+      <div class="important-info" id="important-info">
+        <h4>⚠️ Important Information</h4>
+        <ul id="info-list">
+          <li>Please arrive at the airport 2 hours before departure</li>
+          <li>Carry a valid government-issued photo ID</li>
+          <li>Check-in closes 45 minutes before departure</li>
+          <li>Baggage allowance: 15kg check-in + 7kg cabin</li>
+        </ul>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-primary" onclick="downloadTicket()">📥 Download Ticket</button>
+        <button class="btn btn-secondary" onclick="shareTicket()">📤 Share Ticket</button>
+        <button class="btn btn-secondary" onclick="printTicket()">🖨️ Print Ticket</button>
+      </div>
+    </div>
+  </div>
+
+    <script src="/js/alert-modal.js"></script>
+  <script>
+    function loadTicketData() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const bookingId = urlParams.get("id");
+      const bookings = JSON.parse(
+        localStorage.getItem("travelmate_bookings") || "[]"
+      );
+
+      if (bookings.length === 0) {
+        showAlertModal("No bookings found", "error");
+        return;
+      }
+
+      const booking = bookingId
+        ? bookings.find((item) => item.id === bookingId)
+        : bookings[bookings.length - 1];
+
+      if (!booking) {
+        showAlertModal("Booking not found", "error");
+        return;
+      }
+
+      displayTicket(booking);
+    }
+
+    function displayTicket(booking) {
+      const user = JSON.parse(
+        localStorage.getItem("user") || "{}"
+      );
+      const primaryPassenger =
+        booking.passenger ||
+        booking.passengers?.[0] || {
+          firstName: user.firstname || "",
+          lastName: user.lastname || "",
+        };
+
+      const icons = {
+        flight: "??",
+        train: "??",
+        bus: "??",
+        cab: "??",
+        cruise: "??",
+        hotel: "??",
+        tour: "???",
+        insurance: "???",
+      };
+
+      const titles = {
+        flight: "Flight Booking",
+        train: "Train Booking",
+        bus: "Bus Booking",
+        cab: "Cab Booking",
+        cruise: "Cruise Booking",
+        hotel: "Hotel Booking",
+        tour: "Tour Package",
+        insurance: "Travel Insurance",
+      };
+
+      const arrows = {
+        flight: "??",
+        train: "??",
+        bus: "??",
+        cab: "??",
+        cruise: "??",
+        hotel: "??",
+        tour: "???",
+        insurance: "???",
+      };
+
+      const type = booking.type || "flight";
+      const travelDate = booking.travelDate || booking.checkinDate || booking.date;
+      const fromLabel = booking.from || booking.destination || "Origin";
+      const toLabel = booking.to || booking.destination || "Destination";
+
+      document.getElementById("service-icon").textContent = icons[type] || "??";
+      document.getElementById("service-title").textContent = titles[type] || "Booking";
+      document.getElementById("service-subtitle").textContent =
+        booking.title || titles[type] || "Booking details";
+      document.getElementById("route-arrow").textContent = arrows[type] || "?";
+      document.getElementById("route-from").textContent = fromLabel;
+      document.getElementById("route-to").textContent = toLabel;
+      document.getElementById("booking-id").textContent = booking.id || "--";
+      document.getElementById("passenger-name").textContent =
+        `${primaryPassenger.firstName || ""} ${
+          primaryPassenger.lastName || ""
+        }`.trim() || "Passenger";
+      document.getElementById("travel-date").textContent =
+        new Date(travelDate).toLocaleDateString();
+      document.getElementById("booking-date").textContent = new Date(
+        booking.date || new Date()
+      ).toLocaleDateString();
+      document.getElementById("total-amount").textContent = booking.price || "?0";
+
+      updateJourneyDetails(booking);
+      updateImportantInfo(type);
+    }
+
+    function updateJourneyDetails(booking) {
+      const timeData = generateRealisticTimes(booking);
+      const timeLabel = document.getElementById("time-label");
+      const arrivalLabel = document.getElementById("arrival-label");
+      const durationLabel = document.getElementById("duration-label");
+      const departureTime = document.getElementById("departure-time");
+      const arrivalTime = document.getElementById("arrival-time");
+      const duration = document.getElementById("duration");
+
+      timeLabel.textContent = "Departure:";
+      arrivalLabel.textContent = "Arrival:";
+      durationLabel.textContent = "Duration:";
+
+      if (booking.type === "cab") {
+        timeLabel.textContent = "Pickup Time:";
+        arrivalLabel.textContent = "Est. Arrival:";
+        durationLabel.textContent = "Est. Duration:";
+      }
+
+      if (booking.type === "hotel") {
+        timeLabel.textContent = "Check-in:";
+        arrivalLabel.textContent = "Check-out:";
+        durationLabel.textContent = "Stay Duration:";
+        departureTime.textContent = "2:00 PM";
+        arrivalTime.textContent = "11:00 AM";
+        duration.textContent = calculateHotelStay(booking);
+        return;
+      }
+
+      if (booking.type === "tour") {
+        timeLabel.textContent = "Tour Start:";
+        arrivalLabel.textContent = "Tour End:";
+        durationLabel.textContent = "Tour Duration:";
+      }
+
+      if (booking.type === "cruise") {
+        timeLabel.textContent = "Boarding:";
+        arrivalLabel.textContent = "Return:";
+        durationLabel.textContent = "Cruise Duration:";
+      }
+
+      departureTime.textContent = booking.departure || timeData.departure;
+      arrivalTime.textContent = booking.arrival || timeData.arrival;
+      duration.textContent = booking.duration || timeData.duration;
+    }
+
+    function generateRealisticTimes(booking) {
+      const routeDistances = {
+        "Mumbai-Delhi": { flight: "2h 15m", train: "16h 30m", bus: "18h 00m", cab: "14h 30m" },
+        "Delhi-Mumbai": { flight: "2h 15m", train: "16h 30m", bus: "18h 00m", cab: "14h 30m" },
+        "Bangalore-Chennai": { flight: "1h 15m", train: "5h 30m", bus: "6h 00m", cab: "4h 30m" },
+        "Chennai-Bangalore": { flight: "1h 15m", train: "5h 30m", bus: "6h 00m", cab: "4h 30m" },
+        "Kolkata-Delhi": { flight: "2h 00m", train: "17h 00m", bus: "20h 00m", cab: "16h 00m" },
+        "Delhi-Kolkata": { flight: "2h 00m", train: "17h 00m", bus: "20h 00m", cab: "16h 00m" }
+      };
+
+      const route = `${booking.from || ""}-${booking.to || ""}`;
+      const reverseRoute = `${booking.to || ""}-${booking.from || ""}`;
+      let duration = "2h 30m";
+
+      if (routeDistances[route]?.[booking.type]) {
+        duration = routeDistances[route][booking.type];
+      } else if (routeDistances[reverseRoute]?.[booking.type]) {
+        duration = routeDistances[reverseRoute][booking.type];
+      }
+
+      let departureHour = 8;
+      let departureMinute = 0;
+
+      if (booking.type === "flight") {
+        departureHour = 6 + Math.floor(Math.random() * 16);
+        departureMinute = Math.floor(Math.random() * 4) * 15;
+      } else if (booking.type === "train") {
+        departureHour = Math.floor(Math.random() * 24);
+        departureMinute = Math.floor(Math.random() * 4) * 15;
+      } else if (booking.type === "bus") {
+        departureHour = 20 + Math.floor(Math.random() * 6);
+        if (departureHour >= 24) {
+          departureHour -= 24;
+        }
+        departureMinute = Math.floor(Math.random() * 4) * 15;
+      } else {
+        departureHour = 8 + Math.floor(Math.random() * 12);
+        departureMinute = Math.floor(Math.random() * 4) * 15;
+      }
+
+      const departure = formatTime(departureHour, departureMinute);
+      const durationParts = duration.match(/(\d+)h\s*(\d+)m/);
+      const durationHours = parseInt(durationParts[1], 10);
+      const durationMinutes = parseInt(durationParts[2], 10);
+
+      let arrivalHour = departureHour + durationHours;
+      let arrivalMinute = departureMinute + durationMinutes;
+
+      if (arrivalMinute >= 60) {
+        arrivalHour += 1;
+        arrivalMinute -= 60;
+      }
+
+      if (arrivalHour >= 24) {
+        arrivalHour -= 24;
+      }
+
+      return {
+        departure,
+        arrival: formatTime(arrivalHour, arrivalMinute),
+        duration
+      };
+    }
+
+    function formatTime(hour, minute) {
+      const period = hour >= 12 ? "PM" : "AM";
+      const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+      return `${displayHour}:${minute.toString().padStart(2, "0")} ${period}`;
+    }
+
+    function calculateHotelStay(booking) {
+      if (!booking.checkinDate || !booking.checkoutDate) {
+        return "1 Night";
+      }
+
+      const checkin = new Date(booking.checkinDate);
+      const checkout = new Date(booking.checkoutDate);
+      const diffMs = checkout - checkin;
+      const nights = Math.max(1, Math.round(diffMs / (1000 * 60 * 60 * 24)));
+      return `${nights} Night${nights > 1 ? "s" : ""}`;
+    }
+
+    function updateImportantInfo(type) {
+      const infoList = document.getElementById("info-list");
+      const infoData = {
+        flight: [
+          "Please arrive at the airport 2 hours before departure",
+          "Carry a valid government-issued photo ID",
+          "Check-in closes 45 minutes before departure",
+          "Baggage allowance: 15kg check-in + 7kg cabin"
+        ],
+        train: [
+          "Please arrive at the station 30 minutes before departure",
+          "Carry a valid government-issued photo ID",
+          "Keep your ticket and ID ready for verification",
+          "Check platform number before boarding"
+        ],
+        bus: [
+          "Please arrive at the bus station 15 minutes before departure",
+          "Carry a valid government-issued photo ID",
+          "Keep your ticket ready for verification",
+          "Baggage allowance: 20kg per passenger"
+        ],
+        cab: [
+          "Driver will contact you 15 minutes before pickup",
+          "Please be ready at the pickup location on time",
+          "Carry a valid government-issued photo ID",
+          "You can track your ride in real-time"
+        ],
+        hotel: [
+          "Check-in time: 2:00 PM, Check-out time: 11:00 AM",
+          "Carry a valid government-issued photo ID",
+          "Early check-in subject to availability",
+          "Complimentary Wi-Fi and breakfast included"
+        ],
+        cruise: [
+          "Arrive at the port 2 hours before departure",
+          "Carry a valid passport for international waters",
+          "All meals and entertainment included",
+          "Dress code applies for dinner"
+        ],
+        tour: [
+          "Meet at the designated pickup point on time",
+          "Carry comfortable walking shoes",
+          "Lunch and refreshments included",
+          "Follow the tour guide instructions"
+        ],
+        insurance: [
+          "Coverage starts from the policy start date",
+          "Keep policy documents handy during travel",
+          "Emergency helpline: +91-1800-XXX-XXXX",
+          "Claim process available 24/7 online"
+        ]
+      };
+
+      infoList.innerHTML = "";
+      (infoData[type] || infoData.flight).forEach((info) => {
+        const li = document.createElement("li");
+        li.textContent = info;
+        infoList.appendChild(li);
+      });
+    }
+
+    function downloadTicket() {
+      const ticketContent = document.getElementById("ticket-card").innerHTML;
+      const newWindow = window.open("", "_blank");
+
+      if (!newWindow) {
+        showAlertModal("Please allow popups to download the ticket", "error");
+        return;
+      }
+
+      newWindow.document.write(`
+        <html>
+          <head>
+            <title>TravelMate Ticket</title>
+            <style>
+              body { font-family: Arial, sans-serif; margin: 20px; }
+              .ticket-card { border: 2px solid #008080; padding: 20px; border-radius: 10px; }
+              .action-buttons { display: none; }
+            </style>
+          </head>
+          <body>
+            <div class="ticket-card">${ticketContent}</div>
+            <script>window.print();<\/script>
+          </body>
+        </html>
+      `);
+      newWindow.document.close();
+    }
+
+    function shareTicket() {
+      if (navigator.share) {
+        navigator.share({
+          title: "TravelMate Booking Ticket",
+          text: "Check out my travel booking!",
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          showAlertModal("Ticket link copied to clipboard!", "success");
+        });
+      }
+    }
+
+    function printTicket() {
+      window.print();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      loadTicketData();
+    });
+  </script>
+</body>
+</html>

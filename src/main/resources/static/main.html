@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TravelMate - Main</title>
+    <link rel="stylesheet" href="/css/popup-styles.css" />
+    <link rel="stylesheet" href="/css/ai-assistant.css" />
+    <style>
+      :root {
+        --primary: #0b8c8f;
+        --primary-dark: #075f63;
+        --accent: #ffd166;
+        --card-bg: rgba(255, 255, 255, 0.92);
+        --text-dark: #16323a;
+        --text-soft: #5e7379;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: var(--text-dark);
+        background: #e6f3f1;
+        position: relative;
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(4, 38, 44, 0.45) 0%,
+            rgba(4, 38, 44, 0.2) 30%,
+            rgba(4, 38, 44, 0.6) 100%
+          ),
+          url("/images/m1.jpg") no-repeat center center / cover;
+        z-index: -2;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(circle at top left, rgba(255, 209, 102, 0.22), transparent 30%),
+          radial-gradient(circle at right center, rgba(11, 140, 143, 0.18), transparent 25%);
+        z-index: -1;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 40px;
+        background: rgba(6, 78, 80, 0.86);
+        backdrop-filter: blur(12px);
+        color: white;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+      }
+
+      .navbar h1 {
+        margin: 0;
+        font-size: 2rem;
+        letter-spacing: -0.03em;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        transition: color 0.3s, transform 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #d8fff7;
+        transform: translateY(-1px);
+      }
+
+      .profile-icon {
+        width: 45px;
+        height: 45px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        overflow: hidden;
+        flex-shrink: 0;
+        border: 2px solid white;
+      }
+
+      .profile-icon img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .content {
+        padding: 116px 24px 40px;
+      }
+
+      .main {
+        text-align: center;
+        color: white;
+        max-width: 1200px;
+        margin: 0 auto 36px;
+        padding: 48px 32px 34px;
+        border-radius: 32px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.14),
+          rgba(255, 255, 255, 0.07)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+      }
+
+      .welcome-hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 26px;
+      }
+
+      .welcome-label {
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .welcome-title {
+        margin: 0;
+        font-size: clamp(2.1rem, 5vw, 4rem);
+        font-weight: bold;
+        line-height: 1.12;
+        color: white;
+        text-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+        animation: welcomeFloat 3.8s ease-in-out infinite;
+      }
+
+      .welcome-name {
+        display: inline-block;
+        margin-left: 10px;
+        color: var(--accent);
+        text-shadow: 0 0 22px rgba(255, 209, 102, 0.45);
+        animation: nameGlow 2.4s ease-in-out infinite;
+      }
+
+      @keyframes welcomeFloat {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
+      }
+
+      @keyframes nameGlow {
+        0%,
+        100% {
+          opacity: 0.9;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.03);
+        }
+      }
+
+      .search-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .search-box input {
+        padding: 15px 20px;
+        width: 70%;
+        border: none;
+        border-radius: 25px 0 0 25px;
+        outline: none;
+        font-size: 16px;
+        color: var(--text-dark);
+        background: white;
+      }
+
+      .search-box button {
+        padding: 15px 25px;
+        border: none;
+        border-radius: 0 25px 25px 0;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .search-box button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 14px 24px rgba(7, 95, 99, 0.28);
+      }
+
+      .search-suggestions {
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 600px;
+        display: none;
+        position: relative;
+        z-index: 100;
+        text-align: left;
+        overflow: hidden;
+      }
+
+      .suggestion-item {
+        padding: 16px 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .suggestion-item:hover {
+        background: #f8f9fa;
+      }
+
+      .suggestion-item:last-child {
+        border-bottom: none;
+      }
+
+      .suggestion-title {
+        font-weight: bold;
+        color: #008080;
+        margin-bottom: 5px;
+      }
+
+      .suggestion-desc {
+        color: var(--text-soft);
+        font-size: 14px;
+      }
+
+      .services {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        margin: 0 auto;
+        max-width: 1200px;
+        padding: 8px 0 0;
+      }
+
+      .service-card {
+        background: var(--card-bg);
+        border-radius: 24px;
+        padding: 28px 20px 22px;
+        text-align: center;
+        box-shadow: 0 18px 34px rgba(14, 44, 49, 0.14);
+        transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+        cursor: pointer;
+        min-height: 210px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(10px);
+      }
+
+      .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 24px 40px rgba(9, 62, 67, 0.2);
+        background: rgba(255, 255, 255, 0.98);
+      }
+
+      .icon-circle {
+        width: 92px;
+        height: 92px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #f6fdfd, #dff6f3);
+        margin-bottom: 16px;
+        overflow: hidden;
+        flex-shrink: 0;
+        box-shadow: inset 0 0 0 1px rgba(11, 140, 143, 0.08);
+      }
+
+      .icon-circle img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .service-card h3 {
+        margin: 0 0 8px;
+        font-size: 1.15rem;
+        color: var(--text-dark);
+      }
+
+      .service-card p {
+        margin: 0;
+        color: var(--text-soft);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .footer {
+        max-width: 1200px;
+        margin: 40px auto 0;
+        background: rgba(8, 34, 38, 0.82);
+        color: #fff;
+        text-align: center;
+        padding: 34px 20px;
+        border-radius: 28px;
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .footer a {
+        color: #7fdfff;
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
+      }
+
+      .footer-bottom {
+        margin-top: 15px;
+        font-size: 14px;
+        color: #ccc;
+      }
+
+      @media (max-width: 768px) {
+        .services {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .navbar {
+          padding: 15px 18px;
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+
+        .search-box {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .search-box input,
+        .search-box button {
+          width: 100%;
+          border-radius: 25px;
+        }
+
+        .main {
+          padding: 34px 18px 26px;
+          border-radius: 24px;
+        }
+
+        .service-card {
+          min-height: 190px;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .content {
+          padding: 108px 14px 28px;
+        }
+
+        .services {
+          grid-template-columns: 1fr;
+        }
+
+        .navbar h1 {
+          font-size: 1.7rem;
+        }
+
+        .nav-links {
+          gap: 12px;
+          flex-wrap: wrap;
+          justify-content: flex-end;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <h1>TravelMate</h1>
+      <div class="nav-links">
+        <a href="upcoming.html">Upcoming</a>
+        <a href="tours.html">Tours</a>
+        <a href="completed.html">Completed</a>
+        <a href="wallet.html">Wallet</a>
+        <a href="profile.html" class="profile-icon">
+          <img src="/images/download.jpg" alt="Profile" width="45" height="45" />
+        </a>
+      </div>
+    </div>
+
+      <div class="content">
+      <div class="main">
+        <div class="welcome-hero">
+          <div class="welcome-label">Welcome Back</div>
+          <h2 class="welcome-title">
+            Hello,
+            <span class="welcome-name" id="username">Traveler</span>
+          </h2>
+        </div>
+        <div class="search-box">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search destinations, hotels, activities..."
+            oninput="showSearchSuggestions()"
+            onkeypress="handleSearchEnter(event)"
+          />
+          <button onclick="performSearch()">Search</button>
+        </div>
+
+        <div class="search-suggestions" id="searchSuggestions"></div>
+      </div>
+
+      <div class="services">
+        <div class="service-card" onclick="openBooking('flight')">
+          <div class="icon-circle">
+            <img src="/images/flight.jpg" alt="Flights" width="80" height="80" />
+          </div>
+          <h3>Flights</h3>
+          <p>Book domestic and international flights in minutes.</p>
+        </div>
+        <div class="service-card" onclick="openBooking('hotel')">
+          <div class="icon-circle">
+            <img src="/images/hotel.png" alt="Hotels" width="80" height="80" />
+          </div>
+          <h3>Hotels</h3>
+          <p>Find stays that match your budget and comfort level.</p>
+        </div>
+        <div class="service-card" onclick="openBooking('train')">
+          <div class="icon-circle">
+            <img
+              src="/images/fast-train-logo-design-high-speed-rail-icon-vector-48573881.jpg"
+              alt="Trains"
+              width="80"
+              height="80"
+            />
+          </div>
+          <h3>Trains</h3>
+          <p>Reserve train journeys with a faster, clearer flow.</p>
+        </div>
+        <div class="service-card" onclick="openBooking('bus')">
+          <div class="icon-circle">
+            <img
+              src="/images/bus-logo-template-modern-travel-vector-54796901.jpg"
+              alt="Buses"
+              width="80"
+              height="80"
+            />
+          </div>
+          <h3>Buses</h3>
+          <p>Choose bus options for easy and affordable travel.</p>
+        </div>
+        <div class="service-card" onclick="openBooking('cab')">
+          <div class="icon-circle">
+            <img
+              src="/images/taxi-car-icon-vector-54563437.jpg"
+              alt="Cabs"
+              width="80"
+              height="80"
+            />
+          </div>
+          <h3>Cabs</h3>
+          <p>Get local and outstation rides with quick booking access.</p>
+        </div>
+        <div class="service-card" onclick="openBooking('tour')">
+          <div class="icon-circle">
+            <img src="/images/tour for explore.jpg" alt="Tours" width="80" height="80" />
+          </div>
+          <h3>Tours</h3>
+          <p>Explore curated tours and experiences for every traveler.</p>
+        </div>
+        <div class="service-card" onclick="openBooking('cruise')">
+          <div class="icon-circle">
+            <img src="/images/cruise.png" alt="Cruise" width="80" height="80" />
+          </div>
+          <h3>Cruise</h3>
+          <p>Browse relaxing cruise options with a premium feel.</p>
+        </div>
+        <div class="service-card" onclick="openBooking('insurance')">
+          <div class="icon-circle">
+            <img src="/images/insurance.jpg" alt="Insurance" width="80" height="80" />
+          </div>
+          <h3>Insurance</h3>
+          <p>Protect your trip with simple travel insurance choices.</p>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="footer-content">
+          <h3>Contact Us</h3>
+          <p>
+            Email:
+            <a href="TravelMate@gmail.com">TravelMate@gmail.com</a>
+          </p>
+          <p>Phone: +91-987xxxxxx</p>
+          <p>Address: Hyderabad, Telangana, India</p>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 TravelMate Pvt. Ltd. | All Rights Reserved</p>
+        </div>
+      </footer>
+    </div>
+    <div class="ai-assistant-root" data-ai-assistant>
+      <div class="ai-assistant-panel" data-ai-panel>
+        <div class="ai-assistant-header">
+          <div class="ai-assistant-eyebrow">TravelMate AI</div>
+          <h3 class="ai-assistant-title">Your smart booking companion</h3>
+          <p class="ai-assistant-subtitle">
+            Ask for ideas, travel help, or direct bookings in plain language.
+          </p>
+        </div>
+        <div class="ai-assistant-messages" data-ai-messages></div>
+        <div class="ai-assistant-composer">
+          <form class="ai-assistant-form" data-ai-form>
+            <textarea
+              class="ai-assistant-input"
+              data-ai-input
+              placeholder="Book a train to Chennai tomorrow for 2 people..."
+              rows="1"
+            ></textarea>
+            <button class="ai-assistant-send" data-ai-send type="submit">→</button>
+          </form>
+          <p class="ai-assistant-hint">
+            Logged-in users can complete bookings directly from this chat.
+          </p>
+        </div>
+      </div>
+      <button class="ai-assistant-toggle" type="button" data-ai-toggle aria-label="Open AI assistant">
+        <span class="ai-assistant-toggle-icon">AI</span>
+      </button>
+    </div>
+    <script src="/js/popup-manager.js"></script>
+    <script src="/js/ai-assistant.js"></script>
+    <script>
+    
+      const searchData = {
+        destinations: [
+          {
+            name: "Goa",
+            type: "destination",
+            desc: "Beaches, nightlife, Portuguese heritage",
+          },
+          {
+            name: "Kerala",
+            type: "destination",
+            desc: "Backwaters, hill stations, Ayurveda",
+          },
+          {
+            name: "Rajasthan",
+            type: "destination",
+            desc: "Palaces, desert, royal heritage",
+          },
+          {
+            name: "Himachal Pradesh",
+            type: "destination",
+            desc: "Mountains, adventure, snow",
+          },
+          {
+            name: "Tamil Nadu",
+            type: "destination",
+            desc: "Temples, culture, South Indian cuisine",
+          },
+          {
+            name: "Mumbai",
+            type: "destination",
+            desc: "Financial capital, Bollywood, street food",
+          },
+          {
+            name: "Delhi",
+            type: "destination",
+            desc: "Capital city, history, monuments",
+          },
+          {
+            name: "Bangalore",
+            type: "destination",
+            desc: "IT hub, gardens, pleasant weather",
+          },
+        ],
+        services: [
+          {
+            name: "Flight booking",
+            type: "service",
+            desc: "Book domestic and international flights",
+          },
+          {
+            name: "Train booking",
+            type: "service",
+            desc: "Reserve train tickets across India",
+          },
+          {
+            name: "Bus booking",
+            type: "service",
+            desc: "Book bus tickets for intercity travel",
+          },
+          {
+            name: "Cab booking",
+            type: "service",
+            desc: "Book local and outstation cabs",
+          },
+          {
+            name: "Hotel booking",
+            type: "service",
+            desc: "Find and book hotels worldwide",
+          },
+          {
+            name: "Tour packages",
+            type: "service",
+            desc: "Curated tour packages and experiences",
+          },
+        ],
+      };
+
+      function openBooking(type) {
+        switch (type) {
+          case "flight":
+            window.location.href = "flights.html";
+            break;
+          case "train":
+            window.location.href = "trains.html";
+            break;
+          case "bus":
+            window.location.href = "buses.html";
+            break;
+          case "cab":
+            window.location.href = "cabs.html";
+            break;
+          case "hotel":
+            window.location.href = "hotels.html";
+            break;
+          case "tour":
+            window.location.href = "tours.html";
+            break;
+          case "cruise":
+            window.location.href = "cruise.html";
+            break;
+          case "insurance":
+            window.location.href = "insurance.html";
+            break;
+          default:
+            showErrorPopup("Coming Soon", "This feature is coming soon!");
+        }
+      }
+       
+      function showSearchSuggestions() {
+        const input = document.getElementById("searchInput");
+        const suggestions = document.getElementById("searchSuggestions");
+        const query = input.value.toLowerCase().trim();
+
+        if (query.length < 2) {
+          suggestions.style.display = "none";
+          return;
+        }
+
+        const allSuggestions = [
+          ...searchData.destinations,
+          ...searchData.services,
+        ];
+        const filteredSuggestions = allSuggestions
+          .filter(
+            (item) =>
+              item.name.toLowerCase().includes(query) ||
+              item.desc.toLowerCase().includes(query)
+          )
+          .slice(0, 5);
+
+        if (filteredSuggestions.length === 0) {
+          suggestions.style.display = "none";
+          return;
+        }
+
+        suggestions.innerHTML = "";
+        filteredSuggestions.forEach((item) => {
+          const suggestionItem = document.createElement("div");
+          suggestionItem.className = "suggestion-item";
+          suggestionItem.innerHTML = `
+          <div class="suggestion-title">${item.name}</div>
+          <div class="suggestion-desc">${item.desc}</div>
+        `;
+          suggestionItem.onclick = () => selectSuggestion(item);
+          suggestions.appendChild(suggestionItem);
+        });
+
+        suggestions.style.display = "block";
+      }
+
+      function selectSuggestion(item) {
+        const input = document.getElementById("searchInput");
+        const suggestions = document.getElementById("searchSuggestions");
+
+        input.value = item.name;
+        suggestions.style.display = "none";
+
+        performSearch(item);
+      }
+
+      function handleSearchEnter(event) {
+        if (event.key === "Enter") {
+          performSearch();
+        }
+      }
+
+      function performSearch(selectedItem = null) {
+        const input = document.getElementById("searchInput");
+        const suggestions = document.getElementById("searchSuggestions");
+        const query = input.value.trim();
+
+        suggestions.style.display = "none";
+
+        if (!query) {
+          showErrorPopup("Search Error", "Please enter a search term");
+          return;
+        }
+
+        if (selectedItem) {
+          handleSelectedSearch(selectedItem);
+        } else {
+          handleGeneralSearch(query);
+        }
+      }
+
+      function handleSelectedSearch(item) {
+        if (item.type === "destination") {
+          window.location.href = `plan.html?destination=${encodeURIComponent(
+            item.name
+          )}`;
+        } else if (item.type === "service") {
+          const serviceMap = {
+            "Flight booking": "flights.html",
+            "Train booking": "trains.html",
+            "Bus booking": "buses.html",
+            "Cab booking": "cabs.html",
+            "Hotel booking": "hotels.html",
+            "Tour packages": "tours.html",
+          };
+
+          const page = serviceMap[item.name];
+          if (page) {
+            window.location.href = page;
+          } else {
+            showErrorPopup("Coming Soon", "This feature is coming soon!");
+          }
+        }
+      }
+
+      function handleGeneralSearch(query) {
+        const destination = searchData.destinations.find((dest) =>
+          dest.name.toLowerCase().includes(query.toLowerCase())
+        );
+
+        if (destination) {
+          window.location.href = `plan.html?destination=${encodeURIComponent(
+            destination.name
+          )}`;
+          return;
+        }
+
+        const service = searchData.services.find((serv) =>
+          serv.name.toLowerCase().includes(query.toLowerCase())
+        );
+
+        if (service) {
+          handleSelectedSearch(service);
+          return;
+        }
+
+        window.location.href = `plan.html?search=${encodeURIComponent(query)}`;
+      }
+
+      document.addEventListener("click", function (event) {
+        const suggestions = document.getElementById("searchSuggestions");
+        const searchBox = document.querySelector(".search-box");
+
+        if (!searchBox.contains(event.target)) {
+          suggestions.style.display = "none";
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        try {
+          const userData = localStorage.getItem("user");
+          if (!userData || userData === "undefined" || userData === "null") return;
+          const user = JSON.parse(userData);
+          const el = document.getElementById("username");
+          if (el && user && (user.firstname || user.username)) {
+            el.innerText = user.firstname || user.username;
+          }
+        } catch (e) {
+          console.error("Failed to load user", e);
+        }
+      });
+    </script>
+  
+  </body>
+</html>
