@@ -1,66 +1,72 @@
 package com.klu.controller;
 
+import com.klu.service.OtpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class OtpController {
 
     @Autowired
-    private JavaMailSender mailSender;
-
-    private final Map<String, String> otpStore = new HashMap<>();
+    private OtpService otpService;
 
     @PostMapping("/send-otp")
-    public ResponseEntity<Map<String, String>> sendOtp(@RequestBody Map<String, String> data) {
-        String email = data.get("email");
+    public ResponseEntity<Map<String, String>> sendOtp(@RequestBody Map<String, String> body) {
         Map<String, String> response = new HashMap<>();
+        String email = body.get("email");
 
         if (email == null || email.isBlank()) {
-            response.put("error", "Email is required");
+            response.put("status", "error");
+            response.put("message", "Email is required");
             return ResponseEntity.badRequest().body(response);
         }
 
-        String otp = String.valueOf(100000 + new Random().nextInt(900000));
-        otpStore.put(email, otp);
+        System.out.println("[OTP] Received request for email: " + email);
 
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(email);
-            message.setSubject("TravelMate OTP Verification");
-            message.setText("Your OTP is: " + otp + "\n\nThis OTP is valid for 10 minutes.");
-            mailSender.send(message);
+            otpService.generateAndSendOtp(email);
+            System.out.println("[OTP] OTP sent successfully to: " + email);
+            response.put("status", "success");
+            response.put("message", "OTP sent successfully");
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            response.put("error", "Failed to send OTP email: " + e.getMessage());
+            System.err.println("[OTP] Failed to send OTP: " + e.getMessage());
+            response.put("status", "error");
+            response.put("message", "Failed to send OTP: " + e.getMessage());
             return ResponseEntity.internalServerError().body(response);
         }
-
-        response.put("message", "OTP sent to " + email);
-        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/verify-otp")
-    public ResponseEntity<Map<String, String>> verifyOtp(@RequestBody Map<String, String> data) {
-        String email = data.get("email");
-        String otp = data.get("otp");
+    public ResponseEntity<Map<String, String>> verifyOtp(@RequestBody Map<String, String> body) {
         Map<String, String> response = new HashMap<>();
+        String email = body.get("email");
+        String otp = body.get("otp");
 
-        if (otp != null && otp.equals(otpStore.get(email))) {
-            otpStore.remove(email);
+        if (email == null || otp == null) {
+            response.put("status", "error");
+            response.put("message", "Email and OTP are required");
+            return ResponseEntity.badRequest().body(response);
+        }
+
+        System.out.println("[OTP] Verifying OTP for email: " + email);
+
+        if (otpService.verifyOtp(email, otp)) {
+            System.out.println("[OTP] OTP verified successfully for: " + email);
             response.put("status", "success");
+            response.put("message", "OTP verified successfully");
             return ResponseEntity.ok(response);
         }
 
-        response.put("error", "Invalid or expired OTP");
+        System.out.println("[OTP] Invalid OTP attempt for: " + email);
+        response.put("status", "error");
+        response.put("message", "Invalid or expired OTP");
         return ResponseEntity.badRequest().body(response);
     }
 }

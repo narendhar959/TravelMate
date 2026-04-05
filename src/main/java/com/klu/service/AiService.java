@@ -64,11 +64,13 @@ public class AiService {
 
             // ── UNREADABLE ────────────────────────────────────────────────
             if (AiUtils.isUnreadable(message)) {
+                String name = AiUtils.userDisplayName(userCtx);
+                String suffix = name.isEmpty() ? "" : " " + name;
                 Map<String, Object> r = new HashMap<>();
                 r.put("intent",        "chat");
                 r.put("booking_state", bookingState.toMap());
-                r.put("reply",         "I think you may have typed that by mistake, "
-                    + AiUtils.userDisplayName(userCtx) + ". Please send it again and I will help you.");
+                r.put("reply",         "I think you may have typed that by mistake"
+                    + suffix + ". Please send it again and I will help you.");
                 return r;
             }
 
@@ -332,12 +334,16 @@ public class AiService {
 
     // ── reply builders ─────────────────────────────────────────────────────
     private String buildGreeting(Object user) {
-        return "Hi " + AiUtils.userDisplayName(user) + "! I'm TravelMate AI. "
+        String name = AiUtils.userDisplayName(user);
+        String greeting = name.isEmpty() ? "Hi!" : "Hi " + name + "!";
+        return greeting + " I'm TravelMate AI. "
             + "I can help you plan trips and book flights, trains, buses, cabs, hotels, tours, cruises, and insurance.";
     }
 
     private String buildStopReply(Object user) {
-        return "Sure " + AiUtils.userDisplayName(user) + ", I'll stop here. Come back anytime you want help with travel.";
+        String name = AiUtils.userDisplayName(user);
+        String prefix = name.isEmpty() ? "Sure" : "Sure " + name;
+        return prefix + ", I'll stop here. Come back anytime you want help with travel.";
     }
 
     private String buildMissingDetailsReply(BookingState s, Object user) {
@@ -346,7 +352,7 @@ public class AiService {
         List<String> readable = new ArrayList<>();
         for (String f : missing) readable.add(AiUtils.friendlyFieldName(f, s.bookingType));
         if (readable.size() == 1)
-            return "I can help with that. Please tell me the " + readable.get(0) + ".";
+            return "Please tell me the " + readable.get(0) + ".";
         String last = readable.remove(readable.size() - 1);
         return "I can book that for you. Please share the " + String.join(", ", readable) + " and " + last + ".";
     }
@@ -363,32 +369,48 @@ public class AiService {
     }
 
     private String buildQuoteReply(Object user, BookingState s) {
+        String name = AiUtils.userDisplayName(user);
         double amount = s.quoteAmount != null ? s.quoteAmount : estimateAmount(s);
-        return "Hi " + AiUtils.userDisplayName(user) + ", your total bill is Rs. "
+        String prefix = name.isEmpty() ? "Your" : "Hi " + name + ", your";
+        return prefix + " total bill is Rs. "
             + String.format("%.2f", amount) + " for " + buildBookingSummary(s)
             + ". If this looks good, reply OK to continue to payment.";
     }
 
     private String buildModifiedReply(Object user, BookingState s) {
+        String name = AiUtils.userDisplayName(user);
         double amount = s.quoteAmount != null ? s.quoteAmount : estimateAmount(s);
-        return "Okay " + AiUtils.userDisplayName(user) + ", I changed it. The updated total is Rs. "
+        String prefix = name.isEmpty() ? "Done" : "Okay " + name;
+        return prefix + ", I changed it. The updated total is Rs. "
             + String.format("%.2f", amount) + " for " + buildBookingSummary(s)
             + ". Reply OK if you want to continue to payment.";
     }
 
     private String buildDiscountReply(Object user, BookingState s) {
+        String name = AiUtils.userDisplayName(user);
         double amount = s.quoteAmount != null ? s.quoteAmount : estimateAmount(s);
-        return "I found you a better price, " + AiUtils.userDisplayName(user) + ". The new total is Rs. "
+        String prefix = name.isEmpty() ? "I found you a better price." : "I found you a better price, " + name + ".";
+        return prefix + " The new total is Rs. "
             + String.format("%.2f", amount) + ". If you like this fare, reply OK to continue to payment.";
     }
 
     private String fallbackChatReply(String message, Object user) {
         if (AiUtils.isGreeting(message)) return buildGreeting(user);
-        return "Hi " + AiUtils.userDisplayName(user) + "! I can help with bookings, travel suggestions, budgets, and itineraries.";
+        String n = AiUtils.normalize(message);
+        if (n.contains("help"))
+            return "I can help you book flights, trains, buses, cabs, hotels, tours, cruises, and insurance. Just tell me what you need!";
+        if (n.contains("cancel"))
+            return "To cancel a booking, please go to your Upcoming Bookings page and select the booking you want to cancel.";
+        if (n.contains("status") || n.contains("my booking"))
+            return "You can check your booking status in the Upcoming Bookings section. What else can I help you with?";
+        if (n.contains("price") || n.contains("cost") || n.contains("fare") || n.contains("how much"))
+            return "Prices depend on the type of booking. Tell me what you want to book and I'll give you an estimate!";
+        return "I'm not sure I understand. Could you rephrase that? I can help with bookings, travel suggestions, and itineraries.";
     }
 
     private String bookingConfirmationReply(User user, Map<String, Object> booking) {
-        String name = user.getFirstname() != null ? user.getFirstname() : user.getUsername();
+        String name = user.getFirstname() != null && !user.getFirstname().isBlank()
+            ? user.getFirstname() : user.getUsername();
         return "Done " + name + ". Your " + booking.get("type") + " booking is confirmed for "
             + booking.get("travel_date") + ". Booking reference: " + booking.get("booking_ref")
             + ". Would you like to book more plans?";

@@ -9,7 +9,7 @@ class PopupManager {
       const link = document.createElement("link");
       link.id = "popup-styles";
       link.rel = "stylesheet";
-      link.href = "popup-styles.css";
+      link.href = "/css/popup-styles.css";
       document.head.appendChild(link);
     }
   }

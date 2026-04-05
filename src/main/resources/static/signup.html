@@ -501,7 +501,7 @@
   btn.disabled = true;
 
   try {
-    const response = await fetch(`${window.location.origin}/api/send-otp`, {
+    const response = await fetch("/api/send-otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: formData.email })
@@ -509,7 +509,7 @@
 
     const data = await response.json();
 
-    if (response.ok) {
+    if (response.ok && data.status === "success") {
       document.getElementById("otpSection").style.display = "block";
       btn.textContent = "OTP Sent ✓";
       showSuccessPopup("OTP Sent", `A 6-digit OTP has been sent to ${formData.email}. Check your inbox.`);
@@ -517,13 +517,14 @@
     } else {
       btn.textContent = "Send OTP";
       btn.disabled = false;
-      showErrorPopup("Failed", data.error || "Could not send OTP");
+      showErrorPopup("Failed", data.message || "Could not send OTP");
     }
 
   } catch (err) {
+    console.error("sendOTP error:", err);
     btn.textContent = "Send OTP";
     btn.disabled = false;
-    showErrorPopup("Error", "Cannot reach server. Make sure Spring Boot is running.");
+    showErrorPopup("Error", "Failed to send OTP. Please try again.");
   }
 }
 
@@ -536,7 +537,7 @@
   }
 
   try {
-    const response = await fetch(`${window.location.origin}/api/verify-otp`, {
+    const response = await fetch("/api/verify-otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: formData.email, otp: enteredOTP })
@@ -544,15 +545,15 @@
 
     const data = await response.json();
 
-    if (response.ok) {
-      // OTP correct — now create the account
+    if (response.ok && data.status === "success") {
       await createAccount();
     } else {
-      showErrorPopup("Wrong OTP", data.error || "OTP verification failed.");
+      showErrorPopup("Wrong OTP", data.message || "OTP verification failed.");
     }
 
   } catch (err) {
-    showErrorPopup("Error", "Cannot reach server. Make sure Spring Boot is running.");
+    console.error("verifyOTP error:", err);
+    showErrorPopup("Error", "Failed to verify OTP. Please try again.");
   }
 }
 
@@ -560,11 +561,9 @@
   try {
     showLoadingPopup("Creating Account", "Please wait…");
 
-    const response = await fetch(`${window.location.origin}/api/signup`, {
+    const response = await fetch("/api/signup", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         firstname: formData.firstname,
         lastname: formData.lastname,
@@ -582,22 +581,20 @@
     closePopup();
 
     if (response.ok) {
-    	localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("user", JSON.stringify(data.user));
       showSuccessPopup("Account Created", "Welcome to TravelMate!");
-
       setTimeout(() => {
         window.location.href = "main.html";
       }, 2000);
-
     } else {
       showErrorPopup("Signup Failed", data.error || "Something went wrong");
     }
 
   } catch (err) {
-  console.error("FULL ERROR:", err); // 🔥 ADD THIS
-  closePopup();
-  showErrorPopup("Error", "Server not reachable");
-}
+    console.error("createAccount error:", err);
+    closePopup();
+    showErrorPopup("Error", "Failed to create account. Please try again.");
+  }
 }
   // ─────────────────────────────────────────────────────────────────────────
  

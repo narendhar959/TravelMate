@@ -12,7 +12,7 @@ class BookingModal {
       const link = document.createElement("link");
       link.id = "booking-modal-styles";
       link.rel = "stylesheet";
-      link.href = "booking-modal.css";
+      link.href = "/css/booking-modal.css";
       document.head.appendChild(link);
     }
   }

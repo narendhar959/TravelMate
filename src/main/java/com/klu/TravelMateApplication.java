@@ -10,4 +10,4 @@ public class TravelMateApplication {
 		SpringApplication.run(TravelMateApplication.class, args);
 	}
 
-}
+}	

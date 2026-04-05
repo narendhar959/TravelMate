@@ -282,17 +282,37 @@ public class AiUtils {
     // ── user display name ─────────────────────────────────────────────────
     @SuppressWarnings("unchecked")
     public static String userDisplayName(Object user) {
-        if (user == null) return "Traveler";
+        if (user == null) return "";
+        if (user instanceof com.klu.entity.User) {
+            com.klu.entity.User u = (com.klu.entity.User) user;
+            if (u.getFirstname() != null && !u.getFirstname().isBlank())
+                return capitalize(u.getFirstname().trim());
+            if (u.getUsername() != null && !u.getUsername().isBlank())
+                return capitalize(u.getUsername().trim());
+        }
         if (user instanceof Map) {
             Map<String,Object> u = (Map<String,Object>) user;
-            if (u.get("firstname") != null && !u.get("firstname").toString().isBlank())
-                return u.get("firstname").toString();
-            if (u.get("username") != null && !u.get("username").toString().isBlank())
-                return u.get("username").toString();
-            if (u.get("fullname") != null && !u.get("fullname").toString().isBlank())
-                return u.get("fullname").toString();
+            // try every possible key the frontend might send
+            for (String key : Arrays.asList("firstname","firstName","first_name",
+                                             "fullname","fullName","full_name",
+                                             "username","userName","name")) {
+                Object v = u.get(key);
+                if (v != null && !v.toString().isBlank()) {
+                    // for fullname take only first word
+                    String val = v.toString().trim();
+                    if (key.toLowerCase().contains("full") || key.toLowerCase().contains("name")) {
+                        val = val.split("\\s+")[0];
+                    }
+                    return capitalize(val);
+                }
+            }
         }
-        return "Traveler";
+        return "";
+    }
+
+    private static String capitalize(String s) {
+        if (s == null || s.isEmpty()) return s;
+        return Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();
     }
 
     // ── required fields ───────────────────────────────────────────────────
