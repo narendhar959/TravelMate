@@ -16,10 +16,10 @@ import java.util.*;
 @Service
 public class AiService {
 
-    @Autowired(required=false)
+    @Autowired
     private BookingRepository bookingRepo;
     
-    @Autowired(required=false)
+    @Autowired
     private UserRepository    userRepo;
 
     // ── entry point ────────────────────────────────────────────────────────

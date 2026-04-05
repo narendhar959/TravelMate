@@ -11,7 +11,7 @@ import java.util.UUID;
 @Service
 public class BookingService {
 
-    @Autowired(required=false)
+    @Autowired
     private BookingRepository repo;
 
     public Booking createBooking(Booking booking) {
