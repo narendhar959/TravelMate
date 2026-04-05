@@ -1,5 +1,6 @@
 (function () {
-  const API_URL = "http://localhost:8080/api/assistant-chat";
+  const BASE_URL = window.location.origin;
+  const API_URL = `${BASE_URL}/api/assistant-chat`;
   const STORAGE_PREFIX = "travelmate_ai_chat";
   const UPI_ID = "travelmate@upi";
 

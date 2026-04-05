@@ -721,7 +721,8 @@ class BookingModal {
       ? new Date(booking.travelDate).toISOString().split("T")[0]
       : new Date().toISOString().split("T")[0];
 
-    const response = await fetch("http://localhost:5000/api/booking", {
+    const BASE_URL = window.location.origin;
+    const response = await fetch(`${BASE_URL}/api/booking`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
