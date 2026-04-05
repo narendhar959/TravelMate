@@ -501,7 +501,7 @@
   btn.disabled = true;
 
   try {
-    const response = await fetch("http://localhost:8080/api/send-otp", {
+    const response = await fetch(`${window.location.origin}/api/send-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: formData.email })
@@ -536,7 +536,7 @@
   }
 
   try {
-    const response = await fetch("http://localhost:8080/api/verify-otp", {
+    const response = await fetch(`${window.location.origin}/api/verify-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: formData.email, otp: enteredOTP })
@@ -560,7 +560,7 @@
   try {
     showLoadingPopup("Creating Account", "Please wait…");
 
-    const response = await fetch("http://localhost:8080/api/signup", {
+    const response = await fetch(`${window.location.origin}/api/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

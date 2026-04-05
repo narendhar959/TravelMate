@@ -528,7 +528,7 @@
         if (userId) {
           try {
             const response = await fetch(
-              `http://localhost:8080/api/bookings/${userId}/grouped`
+              `${window.location.origin}/api/bookings/${userId}/grouped`
             );
 
             if (response.ok) {
