@@ -18,7 +18,9 @@ public class AiService {
 
     @Autowired(required=false)
     private BookingRepository bookingRepo;
-    @Autowired private UserRepository    userRepo;
+    
+    @Autowired(required=false)
+    private UserRepository    userRepo;
 
     // ── entry point ────────────────────────────────────────────────────────
     @SuppressWarnings("unchecked")
