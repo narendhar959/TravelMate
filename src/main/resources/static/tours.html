@@ -84,14 +84,8 @@
       }
 
       @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
       }
 
       .step-title {
@@ -110,9 +104,7 @@
         font-size: 16px;
       }
 
-      .form-group {
-        margin-bottom: 25px;
-      }
+      .form-group { margin-bottom: 25px; }
 
       .form-group label {
         display: block;
@@ -170,23 +162,9 @@
         box-shadow: 0 10px 25px rgba(0, 128, 128, 0.2);
       }
 
-      .option-icon {
-        font-size: 48px;
-        margin-bottom: 15px;
-        display: block;
-      }
-
-      .option-title {
-        font-weight: bold;
-        font-size: 18px;
-        color: #333;
-        margin-bottom: 8px;
-      }
-
-      .option-subtitle {
-        color: #666;
-        font-size: 14px;
-      }
+      .option-icon { font-size: 48px; margin-bottom: 15px; display: block; }
+      .option-title { font-weight: bold; font-size: 18px; color: #333; margin-bottom: 8px; }
+      .option-subtitle { color: #666; font-size: 14px; }
 
       .checkbox-group {
         display: grid;
@@ -207,18 +185,9 @@
         background: #f8f9fa;
       }
 
-      .checkbox-item:hover {
-        border-color: #008080;
-      }
-
-      .checkbox-item.selected {
-        border-color: #008080;
-        background: rgba(0, 128, 128, 0.05);
-      }
-
-      .checkbox-item input {
-        width: auto;
-      }
+      .checkbox-item:hover { border-color: #008080; }
+      .checkbox-item.selected { border-color: #008080; background: rgba(0, 128, 128, 0.05); }
+      .checkbox-item input { width: auto; }
 
       .navigation-buttons {
         display: flex;
@@ -242,37 +211,13 @@
         gap: 8px;
       }
 
-      .btn-primary {
-        background: linear-gradient(135deg, #008080, #00a0a0);
-        color: white;
-      }
+      .btn-primary { background: linear-gradient(135deg, #008080, #00a0a0); color: white; }
+      .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 128, 128, 0.3); }
+      .btn-primary:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+      .btn-secondary { background: #6c757d; color: white; }
+      .btn-secondary:hover { background: #545b62; }
 
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(0, 128, 128, 0.3);
-      }
-
-      .btn-primary:disabled {
-        background: #ccc;
-        cursor: not-allowed;
-        transform: none;
-      }
-
-      .btn-secondary {
-        background: #6c757d;
-        color: white;
-      }
-
-      .btn-secondary:hover {
-        background: #545b62;
-      }
-
-      .step-indicator {
-        text-align: center;
-        color: #666;
-        font-size: 14px;
-        margin-bottom: 20px;
-      }
+      .step-indicator { text-align: center; color: #666; font-size: 14px; margin-bottom: 20px; }
 
       .itinerary-container {
         background: #f8f9fa;
@@ -304,44 +249,21 @@
         border: 1px solid #e9ecef;
       }
 
-      .budget-amount {
-        font-size: 24px;
-        font-weight: bold;
-        color: #008080;
-        margin-top: 10px;
-      }
+      .budget-amount { font-size: 24px; font-weight: bold; color: #008080; margin-top: 10px; }
 
-      .total-budget {
-        background: linear-gradient(135deg, #008080, #00a0a0);
-        color: white;
-      }
+      .total-budget { background: linear-gradient(135deg, #008080, #00a0a0); color: white; }
+      .total-budget .budget-amount { color: white; }
 
-      .total-budget .budget-amount {
-        color: white;
-      }
-
-      .ai-response {
-        animation: slideIn 0.5s ease;
-      }
+      .ai-response { animation: slideIn 0.5s ease; }
 
       @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
       }
 
       @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
       }
 
       .error-message {
@@ -378,19 +300,14 @@
         </div>
 
         <div class="step-container">
+          <!-- Step 1 -->
           <div class="step active" id="step1">
             <div class="step-indicator">Step 1 of 6</div>
             <div class="step-title">Where would you like to go?</div>
             <div class="step-subtitle">Choose your dream destination</div>
-
             <div class="form-group">
               <label for="destination">Destination</label>
-              <input
-                type="text"
-                id="destination"
-                placeholder="e.g., Goa, Kerala, Rajasthan, etc."
-                list="destinations"
-              />
+              <input type="text" id="destination" placeholder="e.g., Goa, Kerala, Rajasthan, etc." list="destinations" />
               <datalist id="destinations">
                 <option value="Goa"></option>
                 <option value="Kerala"></option>
@@ -404,45 +321,38 @@
                 <option value="Uttarakhand"></option>
               </datalist>
             </div>
-
             <div class="form-group">
               <label for="startDate">Departure Date</label>
               <input type="date" id="startDate" />
             </div>
           </div>
 
-          <!-- Step 2: Transport -->
+          <!-- Step 2 -->
           <div class="step" id="step2">
             <div class="step-indicator">Step 2 of 6</div>
             <div class="step-title">How would you like to travel?</div>
-            <div class="step-subtitle">
-              Choose your preferred mode of transport
-            </div>
-
+            <div class="step-subtitle">Choose your preferred mode of transport</div>
             <div class="option-grid">
               <div class="option-card" onclick="selectTransport('flight')">
-                <div class="option-title">Flight</div>
+                <div class="option-title">✈️ Flight</div>
                 <div class="option-subtitle">Fast & Comfortable</div>
               </div>
               <div class="option-card" onclick="selectTransport('train')">
-                <div class="option-title">Train</div>
+                <div class="option-title">🚆 Train</div>
                 <div class="option-subtitle">Scenic & Economic</div>
               </div>
               <div class="option-card" onclick="selectTransport('bus')">
-                <div class="option-title">Bus</div>
+                <div class="option-title">🚌 Bus</div>
                 <div class="option-subtitle">Budget Friendly</div>
               </div>
             </div>
           </div>
 
-          <!-- Step 3: Accommodation -->
+          <!-- Step 3 -->
           <div class="step" id="step3">
             <div class="step-indicator">Step 3 of 6</div>
             <div class="step-title">Where would you like to stay?</div>
-            <div class="step-subtitle">
-              Select your accommodation preference
-            </div>
-
+            <div class="step-subtitle">Select your accommodation preference</div>
             <div class="option-grid">
               <div class="option-card" onclick="selectAccommodation('5star')">
                 <span class="option-icon">⭐⭐⭐⭐⭐</span>
@@ -462,12 +372,11 @@
             </div>
           </div>
 
-          <!-- Step 4: Meals -->
+          <!-- Step 4 -->
           <div class="step" id="step4">
             <div class="step-indicator">Step 4 of 6</div>
             <div class="step-title">🍽️ What meals would you like included?</div>
             <div class="step-subtitle">Select your meal preferences</div>
-
             <div class="checkbox-group">
               <div class="checkbox-item" onclick="toggleMeal('breakfast')">
                 <input type="checkbox" id="breakfast" name="meals" />
@@ -493,12 +402,11 @@
             </div>
           </div>
 
-          <!-- Step 5: Duration -->
+          <!-- Step 5 -->
           <div class="step" id="step5">
             <div class="step-indicator">Step 5 of 6</div>
             <div class="step-title">📅 How many days?</div>
             <div class="step-subtitle">Choose the duration of your trip</div>
-
             <div class="form-group">
               <label for="duration">Number of Days</label>
               <select id="duration">
@@ -514,7 +422,6 @@
                 <option value="30">1 Month</option>
               </select>
             </div>
-
             <div class="form-group">
               <label for="travelers">Number of Travelers</label>
               <select id="travelers">
@@ -528,49 +435,30 @@
             </div>
           </div>
 
-          <!-- Step 6: Itinerary & Budget -->
+          <!-- Step 6 -->
           <div class="step" id="step6">
             <div class="step-indicator">Step 6 of 6</div>
             <div class="step-title">🎉 Your Perfect Trip Plan</div>
-            <div class="step-subtitle">
-              Here's your personalized itinerary and budget
-            </div>
-
+            <div class="step-subtitle">Here's your personalized itinerary and budget</div>
             <div class="itinerary-container">
-              <h3 style="color: #008080; margin-top: 0">
-                📋 Detailed Itinerary
-              </h3>
+              <h3 style="color: #008080; margin-top: 0">📋 Detailed Itinerary</h3>
               <div id="itineraryDetails"></div>
             </div>
-
             <div class="itinerary-container">
-              <h3 style="color: #008080; margin-top: 0">
-                💰 Smart Budget Breakdown
-              </h3>
-              <div class="budget-summary" id="budgetSummary"></div>
+              <h3 style="color: #008080; margin-top: 0">💰 Smart Budget Breakdown</h3>
+              <div id="budgetSummary"></div>
             </div>
           </div>
 
           <div class="navigation-buttons">
-            <button
-              class="btn btn-secondary"
-              id="prevBtn"
-              onclick="changeStep(-1)"
-            >
-              ← Previous
-            </button>
-            <button
-              class="btn btn-primary"
-              id="nextBtn"
-              onclick="changeStep(1)"
-            >
-              Next →
-            </button>
+            <button class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)">← Previous</button>
+            <button class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">Next →</button>
           </div>
         </div>
       </div>
     </div>
-<script>
+
+    <script>
       let currentStep = 1;
       const totalSteps = 6;
       const API_BASE_URL = window.location.origin;
@@ -585,105 +473,71 @@
         travelers: 1,
       };
 
+      // ─────────────────────────────────────────────
+      // STEP NAVIGATION
+      // ─────────────────────────────────────────────
+
       function updateProgress() {
         const progress = (currentStep / totalSteps) * 100;
         document.getElementById("progressFill").style.width = progress + "%";
       }
 
       function showStep(step) {
-        document
-          .querySelectorAll(".step")
-          .forEach((s) => s.classList.remove("active"));
-
+        document.querySelectorAll(".step").forEach((s) => s.classList.remove("active"));
         document.getElementById(`step${step}`).classList.add("active");
-
-        document.getElementById("prevBtn").style.display =
-          step === 1 ? "none" : "flex";
-        document.getElementById("nextBtn").textContent =
-          step === totalSteps ? "Book Trip 🎉" : "Next →";
-
+        document.getElementById("prevBtn").style.display = step === 1 ? "none" : "flex";
+        document.getElementById("nextBtn").textContent = step === totalSteps ? "Book Trip 🎉" : "Next →";
         updateProgress();
       }
 
       function changeStep(direction) {
         if (direction === 1) {
           if (!validateCurrentStep()) return;
-
-          if (currentStep === totalSteps) {
-            bookTrip();
-            return;
-          }
-
-          if (currentStep === totalSteps - 1) {
-            generateItinerary();
-          }
+          if (currentStep === totalSteps) { bookTrip(); return; }
+          if (currentStep === totalSteps - 1) generateItinerary();
         }
-
         currentStep += direction;
         if (currentStep < 1) currentStep = 1;
         if (currentStep > totalSteps) currentStep = totalSteps;
-
         showStep(currentStep);
       }
 
       function validateCurrentStep() {
         switch (currentStep) {
           case 1:
-            if (
-              !document.getElementById("destination").value ||
-              !document.getElementById("startDate").value
-            ) {
+            if (!document.getElementById("destination").value || !document.getElementById("startDate").value) {
               showError("Please fill in destination and departure date");
               return false;
             }
             formData.destination = document.getElementById("destination").value;
-            formData.startDate = document.getElementById("startDate").value;
+            formData.startDate   = document.getElementById("startDate").value;
             break;
           case 2:
-            if (!formData.transport) {
-              showError("Please select a mode of transport");
-              return false;
-            }
+            if (!formData.transport) { showError("Please select a mode of transport"); return false; }
             break;
           case 3:
-            if (!formData.accommodation) {
-              showError("Please select accommodation type");
-              return false;
-            }
+            if (!formData.accommodation) { showError("Please select accommodation type"); return false; }
             break;
           case 4:
-            formData.meals = Array.from(
-              document.querySelectorAll('input[name="meals"]:checked')
-            ).map((cb) => cb.id);
+            formData.meals = Array.from(document.querySelectorAll('input[name="meals"]:checked')).map(cb => cb.id);
             break;
           case 5:
-            if (!document.getElementById("duration").value) {
-              showError("Please select trip duration");
-              return false;
-            }
-            formData.duration = parseInt(
-              document.getElementById("duration").value
-            );
-            formData.travelers = parseInt(
-              document.getElementById("travelers").value
-            );
+            if (!document.getElementById("duration").value) { showError("Please select trip duration"); return false; }
+            formData.duration  = parseInt(document.getElementById("duration").value);
+            formData.travelers = parseInt(document.getElementById("travelers").value);
             break;
         }
         return true;
       }
 
       function selectTransport(transport) {
-        document.querySelectorAll("#step2 .option-card").forEach((card) => {
-          card.classList.remove("selected");
-        });
+        document.querySelectorAll("#step2 .option-card").forEach(c => c.classList.remove("selected"));
         event.currentTarget.classList.add("selected");
         formData.transport = transport;
       }
 
       function selectAccommodation(accommodation) {
-        document.querySelectorAll("#step3 .option-card").forEach((card) => {
-          card.classList.remove("selected");
-        });
+        document.querySelectorAll("#step3 .option-card").forEach(c => c.classList.remove("selected"));
         event.currentTarget.classList.add("selected");
         formData.accommodation = accommodation;
       }
@@ -691,69 +545,43 @@
       function toggleMeal(meal) {
         const checkbox = document.getElementById(meal);
         const item = event.currentTarget;
-
         checkbox.checked = !checkbox.checked;
-
-        if (checkbox.checked) {
-          item.classList.add("selected");
-        } else {
-          item.classList.remove("selected");
-        }
+        checkbox.checked ? item.classList.add("selected") : item.classList.remove("selected");
       }
 
       function showError(message) {
-        // Remove existing error messages
-        const existingError = document.querySelector(".error-message");
-        if (existingError) {
-          existingError.remove();
-        }
-
-        const errorDiv = document.createElement("div");
-        errorDiv.className = "error-message";
-        errorDiv.textContent = message;
-
-        const currentStepDiv = document.querySelector(".step.active");
-        currentStepDiv.insertBefore(errorDiv, currentStepDiv.firstChild);
-
-        // Remove after 5 seconds
-        setTimeout(() => {
-          if (errorDiv.parentNode) {
-            errorDiv.remove();
-          }
-        }, 5000);
+        const existing = document.querySelector(".error-message");
+        if (existing) existing.remove();
+        const div = document.createElement("div");
+        div.className = "error-message";
+        div.textContent = message;
+        const step = document.querySelector(".step.active");
+        step.insertBefore(div, step.firstChild);
+        setTimeout(() => { if (div.parentNode) div.remove(); }, 5000);
       }
 
       function showSuccess(message) {
-        const successDiv = document.createElement("div");
-        successDiv.className = "success-message";
-        successDiv.textContent = message;
-
-        const currentStepDiv = document.querySelector(".step.active");
-        currentStepDiv.insertBefore(successDiv, currentStepDiv.firstChild);
-
-        setTimeout(() => {
-          if (successDiv.parentNode) {
-            successDiv.remove();
-          }
-        }, 5000);
+        const div = document.createElement("div");
+        div.className = "success-message";
+        div.textContent = message;
+        const step = document.querySelector(".step.active");
+        step.insertBefore(div, step.firstChild);
+        setTimeout(() => { if (div.parentNode) div.remove(); }, 5000);
       }
+
+      // ─────────────────────────────────────────────
+      // API & ITINERARY GENERATION
+      // ─────────────────────────────────────────────
 
       async function callAPI(endpoint, data) {
         try {
           const response = await fetch(`${API_BASE_URL}${endpoint}`, {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
           });
-
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
-          const result = await response.json();
-          return result;
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          return await response.json();
         } catch (error) {
           console.error("API call failed:", error);
           throw error;
@@ -762,480 +590,541 @@
 
       async function generateItinerary() {
         const itineraryContainer = document.getElementById("itineraryDetails");
-        const budgetContainer = document.getElementById("budgetSummary");
-        const nextBtn = document.getElementById("nextBtn");
+        const budgetContainer    = document.getElementById("budgetSummary");
+        const nextBtn            = document.getElementById("nextBtn");
 
-        nextBtn.disabled = true;
+        nextBtn.disabled    = true;
         nextBtn.textContent = "Generating...";
 
         itineraryContainer.innerHTML = `
-          <div style="text-align: center; padding: 40px;">
-            <div style="font-size: 48px; margin-bottom: 20px;">🤖</div>
-            <h3 style="color: #008080;">AI is crafting your perfect itinerary...</h3>
-            <p style="color: #666;">This may take a few moments</p>
-            <div style="display: inline-block; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #008080; border-radius: 50%; animation: spin 1s linear infinite; margin-top: 20px;"></div>
-          </div>
-        `;
+          <div style="text-align:center;padding:40px;">
+            <div style="font-size:48px;margin-bottom:20px;">🗺️</div>
+            <h3 style="color:#008080;">Crafting your perfect itinerary...</h3>
+            <p style="color:#666;">This may take a few moments</p>
+            <div style="display:inline-block;width:40px;height:40px;border:4px solid #f3f3f3;
+              border-top:4px solid #008080;border-radius:50%;animation:spin 1s linear infinite;margin-top:20px;"></div>
+          </div>`;
 
         budgetContainer.innerHTML = `
-          <div style="text-align: center; padding: 40px;">
-            <div style="font-size: 48px; margin-bottom: 20px;">💰</div>
-            <h3 style="color: #008080;">Calculating smart budget...</h3>
-            <p style="color: #666;">Analyzing best prices and options</p>
-            <div style="display: inline-block; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #008080; border-radius: 50%; animation: spin 1s linear infinite; margin-top: 20px;"></div>
-          </div>
-        `;
+          <div style="text-align:center;padding:40px;">
+            <div style="font-size:48px;margin-bottom:20px;">💰</div>
+            <h3 style="color:#008080;">Calculating smart budget...</h3>
+            <p style="color:#666;">Analyzing best prices and options</p>
+            <div style="display:inline-block;width:40px;height:40px;border:4px solid #f3f3f3;
+              border-top:4px solid #008080;border-radius:50%;animation:spin 1s linear infinite;margin-top:20px;"></div>
+          </div>`;
 
         try {
-          const itineraryPrompt = createItineraryPrompt();
-          const budgetPrompt = createBudgetPrompt();
-
           const [itineraryResult, budgetResult] = await Promise.all([
-            callAPI("/api/generate-itinerary", { prompt: itineraryPrompt }),
-            callAPI("/api/generate-budget", { prompt: budgetPrompt }),
+            callAPI("/api/generate-itinerary", { prompt: createItineraryPrompt() }),
+            callAPI("/api/generate-budget",    { prompt: createBudgetPrompt() }),
           ]);
-
-          itineraryContainer.innerHTML = `
-            <div class="ai-response">
-              <div style="background: rgba(0,128,128,0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-                <strong>🤖 AI Travel Assistant:</strong> "I've created a personalized itinerary based on your preferences!"
-              </div>
-              ${formatItineraryResponse(itineraryResult.response)}
-            </div>
-          `;
-
-          budgetContainer.innerHTML = `
-            <div class="ai-response">
-              <div style="background: rgba(0,128,128,0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-                <strong>💰 Smart Budget Analyzer:</strong> "Here's your optimized budget breakdown!"
-              </div>
-              ${formatBudgetResponse(budgetResult.response)}
-            </div>
-          `;
-
-          showSuccess(
-            "AI has successfully generated your personalized trip plan!"
-          );
+          itineraryContainer.innerHTML = `<div class="ai-response">${formatItineraryResponse(itineraryResult.response)}</div>`;
+          budgetContainer.innerHTML    = `<div class="ai-response">${formatBudgetResponse(budgetResult.response)}</div>`;
+          showSuccess("Your personalized trip plan is ready!");
         } catch (error) {
-          console.error("Error generating AI content:", error);
-          showError(
-            "Failed to generate AI content. Please check if the backend server is running."
-          );
-
+          // No backend? Just generate the rich fallback content silently
           generateFallbackContent();
         } finally {
-          nextBtn.disabled = false;
+          nextBtn.disabled    = false;
           nextBtn.textContent = "Book Trip 🎉";
         }
       }
 
       function createItineraryPrompt() {
-        return `Create a detailed ${formData.duration}-day itinerary for ${
-          formData.travelers
-        } traveler(s) visiting ${formData.destination}. 
-        
-        Travel preferences:
-        - Transport: ${formData.transport}
-        - Accommodation: ${formData.accommodation.replace(
-          "star",
-          " star"
-        )} hotel
-        - Meals included: ${formData.meals.join(", ") || "None specified"}
-        - Start date: ${formData.startDate}
-        - Number of travelers: ${formData.travelers}
-        
-        Please provide a day-by-day breakdown with morning, afternoon, and evening activities. Include specific attractions, local experiences, and practical tips. Make it engaging and personalized.`;
+        return `Create a detailed ${formData.duration}-day itinerary for ${formData.travelers} traveler(s) visiting ${formData.destination}.
+Transport: ${formData.transport}, Accommodation: ${formData.accommodation.replace("star"," star")} hotel,
+Meals: ${formData.meals.join(", ") || "None"}, Start date: ${formData.startDate}.
+Provide morning/afternoon/evening breakdown with specific attractions and tips.`;
       }
 
       function createBudgetPrompt() {
-        return `Create a detailed budget breakdown for a ${
-          formData.duration
-        }-day trip to ${formData.destination} for ${
-          formData.travelers
-        } traveler(s).
-        
-        Trip details:
-        - Transport: ${formData.transport}
-        - Accommodation: ${formData.accommodation.replace(
-          "star",
-          " star"
-        )} hotel
-        - Meals: ${formData.meals.join(", ") || "Not included"}
-        - Duration: ${formData.duration} days
-        - Number of travelers: ${formData.travelers}
-        
-        Please provide realistic costs in Indian Rupees (₹) for:
-        1. Transport (round trip)
-        2. Accommodation (per night × duration)
-        3. Meals (if selected)
-        4. Local transport and activities
-        5. Miscellaneous expenses
-        
-        Include money-saving tips and alternatives for different budget ranges.`;
+        return `Create a budget breakdown for a ${formData.duration}-day trip to ${formData.destination} for ${formData.travelers} traveler(s).
+Transport: ${formData.transport}, Accommodation: ${formData.accommodation.replace("star"," star")} hotel,
+Meals: ${formData.meals.join(", ") || "Not included"}.
+Provide costs in Indian Rupees (₹) for transport, accommodation, meals, activities, miscellaneous.`;
       }
 
       function formatItineraryResponse(aiResponse) {
-        const lines = aiResponse.split("\n");
-        let formattedHTML = "";
-        let currentDay = "";
-        let currentContent = "";
-
-        lines.forEach((line) => {
-          const trimmedLine = line.trim();
-          if (trimmedLine.match(/^Day \d+/i)) {
-            if (currentDay && currentContent) {
-              formattedHTML += `
-                <div class="day-item">
-                  <h4 style="color: #008080; margin: 0 0 10px 0;">${currentDay}</h4>
-                  <div style="line-height: 1.6;">${currentContent}</div>
-                </div>
-              `;
-            }
-            // Start new day
-            currentDay = trimmedLine;
-            currentContent = "";
-          } else if (trimmedLine) {
-            currentContent += (currentContent ? "<br>" : "") + trimmedLine;
+        const dayMatches = [...aiResponse.matchAll(/^(day\s+\d+[:\s–-]*[^\n]*)/gim)];
+        if (dayMatches.length === 0) {
+          return `<div class="day-item"><div style="white-space:pre-line;line-height:1.6;">${aiResponse}</div></div>`;
+        }
+        let html = "";
+        for (let i = 0; i < dayMatches.length; i++) {
+          const start   = dayMatches[i].index;
+          const end     = i + 1 < dayMatches.length ? dayMatches[i+1].index : aiResponse.length;
+          const dayText = aiResponse.slice(start, end).trim();
+          const lines   = dayText.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+          const title   = lines[0];
+          let dayHTML   = `<h4 style="color:#008080;margin:0 0 14px 0;font-size:17px;border-bottom:2px solid rgba(0,128,128,0.15);padding-bottom:8px;">📅 ${title}</h4>`;
+          let secLabel  = "", secLines = [];
+          function flushSec() {
+            if (!secLines.length) return;
+            const txt = secLines.join(" ").replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*(.*?)\*/g,"<em>$1</em>");
+            const icons = { morning:"🌅", afternoon:"🌞", evening:"🌙", night:"🌙" };
+            if (secLabel) dayHTML += `<p style="margin:12px 0 4px;font-weight:700;color:#005f5f;">${icons[secLabel.toLowerCase()]||"📌"} ${secLabel}</p>`;
+            dayHTML += `<p style="margin:4px 0 14px;line-height:1.8;color:#333;">${txt}</p>`;
+            secLines = [];
           }
-        });
-
-        // Don't forget the last day
-        if (currentDay && currentContent) {
-          formattedHTML += `
-            <div class="day-item">
-              <h4 style="color: #008080; margin: 0 0 10px 0;">${currentDay}</h4>
-              <div style="line-height: 1.6;">${currentContent}</div>
-            </div>
-          `;
+          for (const line of lines.slice(1)) {
+            const m = line.match(/^(morning|afternoon|evening|night)\s*:/i);
+            if (m) { flushSec(); secLabel = m[1]; } else { secLines.push(line); }
+          }
+          flushSec();
+          html += `<div class="day-item">${dayHTML}</div>`;
         }
-
-        // If no days were found, show the entire response
-        if (!formattedHTML) {
-          formattedHTML = `
-            <div class="day-item">
-              <div style="white-space: pre-line; line-height: 1.6;">${aiResponse}</div>
-            </div>
-          `;
-        }
-
-        return formattedHTML;
+        return html;
       }
 
       function formatBudgetResponse(aiResponse) {
         const lines = aiResponse.split("\n");
-        let budgetHTML = '<div style="line-height: 1.8;">';
-
-        lines.forEach((line) => {
-          const trimmedLine = line.trim();
-          if (trimmedLine) {
-            if (trimmedLine.includes("₹") || trimmedLine.includes("Rs")) {
-              budgetHTML += `<div style="background: rgba(0,128,128,0.05); padding: 10px; margin: 5px 0; border-radius: 5px; border-left: 3px solid #008080;"><strong>${trimmedLine}</strong></div>`;
-            } else if (trimmedLine.match(/^\d+\./)) {
-              // Numbered points
-              budgetHTML += `<div style="margin: 10px 0; padding: 5px 0;"><strong>${trimmedLine}</strong></div>`;
-            } else if (
-              trimmedLine.includes("**") ||
-              trimmedLine.includes("*")
-            ) {
-              const formatted = trimmedLine
-                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-                .replace(/\*(.*?)\*/g, "<em>$1</em>");
-              budgetHTML += `<div style="margin: 5px 0;">${formatted}</div>`;
-            } else {
-              budgetHTML += `<div style="margin: 5px 0;">${trimmedLine}</div>`;
-            }
+        let html = '<div style="line-height:1.85;">';
+        lines.forEach(line => {
+          const t = line.trim();
+          if (!t) return;
+          const clean = t.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*(.*?)\*/g,"<em>$1</em>");
+          if (t.match(/^\d+\.\s/) && t.includes(":")) {
+            html += `<div style="background:rgba(0,128,128,0.06);border-left:4px solid #008080;padding:12px 16px;margin:12px 0;border-radius:0 10px 10px 0;font-weight:700;color:#008080;">${clean}</div>`;
+          } else if (t.includes("₹")) {
+            html += `<div style="background:rgba(0,128,128,0.04);padding:8px 12px;margin:4px 0;border-radius:6px;font-weight:600;color:#005f5f;">${clean}</div>`;
+          } else {
+            html += `<div style="margin:4px 0;color:#444;">${clean}</div>`;
           }
         });
-
-        budgetHTML += "</div>";
-        return budgetHTML;
+        html += "</div>";
+        return html;
       }
 
-      function generateFallbackContent() {
-        const itineraryContainer = document.getElementById("itineraryDetails");
-        const budgetContainer = document.getElementById("budgetSummary");
-
-        let itineraryHTML = "";
-        for (let i = 1; i <= formData.duration; i++) {
-          itineraryHTML += `
-            <div class="day-item">
-              <h4 style="color: #008080; margin: 0 0 10px 0;">Day ${i}</h4>
-              <p style="margin: 5px 0;"><strong>Morning:</strong> ${getActivityForDay(
-                i,
-                "morning"
-              )}</p>
-              <p style="margin: 5px 0;"><strong>Afternoon:</strong> ${getActivityForDay(
-                i,
-                "afternoon"
-              )}</p>
-              <p style="margin: 5px 0;"><strong>Evening:</strong> ${getActivityForDay(
-                i,
-                "evening"
-              )}</p>
-            </div>
-          `;
-        }
-        itineraryContainer.innerHTML = itineraryHTML;
-
-        const budget = calculateBudget();
-        budgetContainer.innerHTML = `
-          <div class="budget-item">
-            <div>🚆 Transport</div>
-            <div class="budget-amount">₹${budget.transport.toLocaleString()}</div>
-          </div>
-          <div class="budget-item">
-            <div>🏨 Accommodation</div>
-            <div class="budget-amount">₹${budget.accommodation.toLocaleString()}</div>
-          </div>
-          <div class="budget-item">
-            <div>🍽️ Meals</div>
-            <div class="budget-amount">₹${budget.meals.toLocaleString()}</div>
-          </div>
-          <div class="budget-item">
-            <div>🎯 Activities</div>
-            <div class="budget-amount">₹${budget.activities.toLocaleString()}</div>
-          </div>
-          <div class="budget-item total-budget">
-            <div>💰 Total Budget</div>
-            <div class="budget-amount">₹${budget.total.toLocaleString()}</div>
-            <div style="font-size: 14px; margin-top: 5px;">for ${
-              formData.travelers
-            } traveler(s)</div>
-          </div>
-        `;
-      }
-
-      function getActivityForDay(day, time) {
-        const activities = {
-          1: {
-            morning: `Arrival and check-in to ${formData.accommodation.replace(
-              "star",
-              " star"
-            )} hotel`,
-            afternoon: `Local sightseeing and ${formData.destination} orientation tour`,
-            evening: `Welcome dinner and rest`,
-          },
-          2: {
-            morning: `Visit top attractions in ${formData.destination}`,
-            afternoon: `Local cuisine experience and shopping`,
-            evening: `Cultural show or local entertainment`,
-          },
-        };
-
-        const genericActivities = {
-          morning: [
-            `Adventure activities`,
-            `Temple/monument visits`,
-            `Nature walks`,
-            `Local markets`,
-          ],
-          afternoon: [
-            `Sightseeing tours`,
-            `Local experiences`,
-            `Adventure sports`,
-            `Cultural activities`,
-          ],
-          evening: [
-            `Sunset viewing`,
-            `Local entertainment`,
-            `Relaxation time`,
-            `Night markets`,
-          ],
-        };
-
-        if (activities[day]) {
-          return activities[day][time];
-        } else {
-          const random =
-            genericActivities[time][
-              Math.floor(Math.random() * genericActivities[time].length)
-            ];
-          return `${random} in ${formData.destination}`;
-        }
-      }
+      // ─────────────────────────────────────────────
+      // BUDGET CALCULATOR
+      // ─────────────────────────────────────────────
 
       function calculateBudget() {
         const baseCosts = {
           transport: {
             flight: { base: 8000, multiplier: 1.5 },
-            train: { base: 2000, multiplier: 1.0 },
-            bus: { base: 1200, multiplier: 0.8 },
+            train:  { base: 2000, multiplier: 1.0 },
+            bus:    { base: 1200, multiplier: 0.8 },
           },
-          accommodation: {
-            "5star": 8000,
-            "4star": 5000,
-            "3star": 3000,
-          },
-          meals: {
-            breakfast: 500,
-            lunch: 800,
-            dinner: 1200,
-          },
+          accommodation: { "5star": 8000, "4star": 5000, "3star": 3000 },
+          meals: { breakfast: 500, lunch: 800, dinner: 1200 },
         };
-
-        const transportCost = Math.round(
-          baseCosts.transport[formData.transport].base *
-            baseCosts.transport[formData.transport].multiplier *
-            formData.travelers
-        );
-
-        const accommodationCost =
-          baseCosts.accommodation[formData.accommodation] *
-          formData.duration *
-          formData.travelers;
-
+        const transportCost    = Math.round(baseCosts.transport[formData.transport].base * baseCosts.transport[formData.transport].multiplier * formData.travelers);
+        const accommodationCost = baseCosts.accommodation[formData.accommodation] * formData.duration * formData.travelers;
         let mealsPerDay = 0;
-        formData.meals.forEach((meal) => {
-          mealsPerDay += baseCosts.meals[meal] || 0;
-        });
-        const mealsCost = mealsPerDay * formData.duration * formData.travelers;
-
+        formData.meals.forEach(m => { mealsPerDay += baseCosts.meals[m] || 0; });
+        const mealsCost      = mealsPerDay * formData.duration * formData.travelers;
         const activitiesCost = 2000 * formData.duration * formData.travelers;
-
-        const total =
-          transportCost + accommodationCost + mealsCost + activitiesCost;
-
         return {
-          transport: transportCost,
+          transport:     transportCost,
           accommodation: accommodationCost,
-          meals: mealsCost,
-          activities: activitiesCost,
-          total: total,
+          meals:         mealsCost,
+          activities:    activitiesCost,
+          total:         transportCost + accommodationCost + mealsCost + activitiesCost,
         };
       }
-function bookTrip() {
-    const user = JSON.parse(localStorage.getItem("user") || "null");
-    if (!user) {
-        window.location.href = "login.html";
-        return;
-    }
-    const budget = calculateBudget();
 
-    const serviceData = {
-        id: `TOUR${Date.now()}`,
-        type: "tour",
-        title: formData.destination + " Trip",
-        from: formData.origin || "",
-        to: formData.destination,
-        date: formData.startDate || new Date().toISOString().split("T")[0],
-        price: `₹${budget.total.toLocaleString()}`,
-        travelers: formData.travelers || 1
-    };
+      // ─────────────────────────────────────────────
+      // DESTINATION DATA (for rich fallback)
+      // ─────────────────────────────────────────────
 
-    window.showBookingModal(serviceData);
-}
+      const destinationData = {
+        "Goa": {
+          emoji: "🏖️", theme: "Sun, Sand & Spice",
+          highlights: ["Baga Beach","Anjuna Flea Market","Basilica of Bom Jesus","Dudhsagar Falls","Old Goa Churches","Calangute Beach","Fort Aguada","Chapora Fort","Mandrem Beach","Spice Plantations"],
+          food: ["Goan Fish Curry","Prawn Balchão","Bebinca","Feni cocktails","Xacuti","Chouriço Pão"],
+          morning: [
+            "Begin your morning with a sunrise stroll along the golden sands of Calangute Beach, where the Arabian Sea glimmers in the early light and local fishermen haul in their nightly catch. The salty breeze carries the scent of fresh coconut and chai from the beachside shacks just beginning to open their shutters. Rent a bicycle from a nearby vendor and pedal through the winding lanes of North Goa, passing whitewashed Portuguese villas draped in bougainvillea, each with its own story of a colonial past slowly merging into a Goan present.",
+            "Wake up early and head to the iconic Anjuna Flea Market (open Wednesdays), where Kashmiri traders, Israeli backpackers, and local Goan artisans come together in a riot of colour. Browse hand-stitched fabrics, silver jewellery, spice bundles, and local cashew wine. Follow up with a hearty Goan breakfast of poee bread with butter and a steaming cup of local filter coffee at a village café in Mapusa — the kind of place with ceiling fans, metal chairs, and no menu in English.",
+            "Spend your morning exploring the UNESCO-listed Old Goa, a hauntingly beautiful collection of 16th-century Portuguese churches. The Basilica of Bom Jesus houses the preserved remains of St. Francis Xavier and draws pilgrims from across the world. The Se Cathedral nearby is one of the largest churches in Asia, its golden bell famous throughout the region. Hire a local guide who will bring the colonial era to vivid life through stories and legends that no guidebook has ever captured.",
+            "Rise before dawn for a guided birdwatching walk through the Salim Ali Bird Sanctuary on the island of Chorao. Over 400 species nest in the mangrove ecosystem here, including the rare Malabar pied hornbill and kingfishers darting like jewels between the roots. Return by wooden ferry across the Mandovi River, arriving back in Panaji just as the city's famous bakeries open their doors and the smell of fresh pão fills the morning air.",
+          ],
+          afternoon: [
+            "After lunch, take a full-day cruise up the Mandovi River aboard a traditional double-decker houseboat. The riverbanks are lined with spice plantations where you can see black pepper vines, vanilla creepers, cardamom clusters, and cashew trees growing in abundance. Your guide will explain how each spice is harvested and used in Goan cuisine, and you'll end with a lavish Goan thali lunch served on banana leaves — an experience that connects the land, the water, and the table in one remarkable afternoon.",
+            "Venture inland to the breathtaking Dudhsagar Falls, one of India's tallest waterfalls, plunging nearly 600 metres through dense jungle in four dramatic tiers. The jeep ride through the Bhagwan Mahaveer Wildlife Sanctuary is an adventure in itself — keep your eyes peeled for gaur, sambar deer, and rare orchids clinging to mossy rock faces. A swim in the emerald pool at the base of the falls is an experience you'll carry for a lifetime.",
+            "Explore the vibrant streets of Panaji, Goa's charming capital, where Latin Quarter vibes meet Konkani culture. The Fontainhas neighbourhood is a labyrinth of narrow lanes lined with ochre, indigo, and terracotta houses, each with carved wooden balconies overflowing with potted plants. Visit the atmospheric Chapel of St. Sebastian and browse the riverside market for local crafts, pottery, and the kind of Goan curios you won't find in any airport shop.",
+          ],
+          evening: [
+            "As the sun dips toward the horizon, join the legendary Goan sunset scene at Chapora Fort. The ruined 17th-century Portuguese fort sits high above the confluence of the Chapora River and the Arabian Sea, offering a panoramic view that turns fiery gold and deep rose as dusk settles. Afterwards, head to the shacks at Vagator Beach for grilled tiger prawns, cold Kingfisher beer, and live trance or reggae music that continues well into the night.",
+            "Spend your evening at one of Goa's famous beach clubs — Tito's Lane in Baga transforms after dark into a carnival of lights, music, and beachside dining. Try the catch-of-the-day grilled whole with Goan masala, washed down with a Feni sour. Local Konkani folk dancers sometimes perform, adding a cultural dimension to the festive atmosphere that is purely, irreducibly Goan.",
+            "Attend a Konkani cultural evening at the Kala Academy, Goa's premier arts centre on the banks of the Mandovi. Traditional dances like Fugdi and Dhalo are performed in elaborate costumes, accompanied by the haunting harmonium-driven music of the western coast. Afterwards, take a midnight stroll along the Miramar promenade and end the night with a plate of rawa-fried pomfret at a late-night seafood joint.",
+          ],
+          tips: [
+            "Rent a scooter (₹300–400/day) for complete freedom — Goa's roads are scooter-friendly and most attractions are spread out across the coast.",
+            "Avoid peak season (December–January) if you want quieter beaches and lower prices. October–November offers perfect weather with far fewer crowds.",
+            "Carry cash as many beach shacks and local vendors don't accept cards, especially in South Goa.",
+            "North Goa is livelier with more nightlife; South Goa is quieter and more scenic — pick your vibe before booking accommodation.",
+            "Always bargain at flea markets — starting price is usually double the fair price, but do so with a smile.",
+            "Try the local toddy (coconut palm wine) from village tapping spots — it's fresh, cheap, and unlike anything bottled."
+          ]
+        },
+
+        "Kerala": {
+          emoji: "🌴", theme: "God's Own Country",
+          highlights: ["Alleppey Backwaters","Munnar Tea Gardens","Thekkady Wildlife","Kovalam Beach","Varkala Cliffs","Fort Kochi","Wayanad Forest","Kumarakom Bird Sanctuary","Bekal Fort","Thrissur Pooram"],
+          food: ["Kerala Sadya","Appam with Stew","Karimeen Pollichathu","Puttu & Kadala Curry","Prawn Moilee","Kerala Banana Chips"],
+          morning: [
+            "Awaken at sunrise aboard your traditional Kerala houseboat — a kettuvallam — as it glides silently through the Alleppey backwaters. The morning mist hangs low over the still water, broken only by the gentle dip of your boatman's pole and the distant call of a kingfisher. Watch village life unfold along the banks: women washing clothes on stone ghats, children waving from school boats, and fishermen casting their circular nets in practiced arcs that have not changed in centuries.",
+            "Start your day at a Kerala Ayurveda centre for an early morning shirodhara treatment — warm, herb-infused sesame oil poured in a continuous stream over your forehead for forty minutes. The experience is profoundly calming, preparing you for a day of slow, deliberate exploration. Follow with a traditional breakfast of puttu and kadala curry — a dish unchanged for centuries in these parts, served on a banana leaf with black coffee grown in the hills above.",
+            "Trek through the cloud-draped tea gardens of Munnar, where rolling hills are carpeted in every conceivable shade of green. The Kolukkumalai Tea Estate, the world's highest organic tea estate, rewards early risers with views that stretch beyond imagination — a sea of emerald below a blue-white sky that makes you forget you're still in India. Your guide will explain the plucking, withering, rolling, and drying process that transforms fresh leaves into the aromatic brew you drink every morning.",
+            "Join a guided morning walk through the Periyar Tiger Reserve in Thekkady, where tracker-guides lead you through bamboo groves and elephant corridors. The reserve is home to tigers, leopards, wild elephants, gaur, and hundreds of bird species. A bamboo rafting experience on Periyar Lake offers extraordinary close encounters with wildlife coming to drink at the water's edge in the soft morning light — a spectacle that feels entirely unscripted.",
+          ],
+          afternoon: [
+            "Take an afternoon cooking class with a local Kerala family in their ancestral home in Fort Kochi. You'll grind fresh coconut, temper mustard seeds in coconut oil, and learn to balance the complex spice layers of a traditional Kerala fish curry. The lesson ends with a full sadya — a ceremonial feast of 26 dishes served on a banana leaf — the most elaborate and arguably the most delicious meal you'll have anywhere in India.",
+            "Explore the remarkable cultural melting pot of Fort Kochi, where Chinese fishing nets, a 500-year-old synagogue, a Portuguese church, Dutch warehouses, and a British cricket ground exist within a few streets of each other. The Paradesi Synagogue, built in 1568, is the oldest active synagogue in the Commonwealth; its hand-painted Chinese floor tiles and Belgian chandeliers are extraordinary in their improbable beauty. The antique shops of Jew Town are perfect for finding old maps, brass oil lamps, and rosewood carvings.",
+            "Cruise the serene Kumarakom Bird Sanctuary by country boat in the golden afternoon light. The sanctuary's flooded forests are winter home to migratory birds from Siberia, Central Asia, and the Himalayas — teals, herons, egrets, cormorants, and the dazzling purple moorhen. Your boatman navigates silently, letting the birds come to you, and the reflecting water turns everything into a mirror-world of impossible, shimmering beauty.",
+          ],
+          evening: [
+            "Witness a Kathakali performance at one of Kochi's cultural centres. Arrive early to watch the two-hour makeup ritual — performers transform their faces into elaborate, stylised masks using only natural pigments, each colour communicating a character type from the ancient Mahabharata and Ramayana. The performance itself is a hypnotic fusion of dance, music, and mime, every eye movement and finger position carrying precise meaning codified over four centuries of unbroken tradition.",
+            "End your day at the dramatic red cliffs of Varkala, Kerala's most distinctive beach. The cliff-top is lined with restaurants and yoga shalas where you can eat fresh-caught red snapper, sip chai, and watch the sun perform its nightly disappearing act into the Arabian Sea in a blaze of crimson and violet. The Janardhanaswamy Temple, perched right at the cliff edge, is lit beautifully at dusk and the sound of its bells carries far across the water.",
+          ],
+          tips: [
+            "Kerala's monsoon (June–September) is actually a magical time to visit — Ayurveda treatments are considered most effective during this season and prices are 30–40% lower.",
+            "Always remove shoes before entering temples; women should carry a dupatta or shawl to cover their shoulders as a mark of respect.",
+            "Book houseboats at least 2–3 weeks in advance during peak season (November–February) — the best ones sell out months ahead.",
+            "Local KSRTC buses are excellent value for intercity travel and give you an unfiltered window into real Kerala life.",
+            "Haggle respectfully at spice markets in Thekkady — quality spices at fair prices are available without drama if you know what you're buying.",
+            "Kerala cuisine is largely coconut-milk based; inform restaurants in advance if you have nut allergies, as coconut appears in almost every dish."
+          ]
+        },
+
+        "Rajasthan": {
+          emoji: "🏰", theme: "The Land of Kings",
+          highlights: ["Amber Fort","City Palace Udaipur","Jaisalmer Desert","Mehrangarh Fort","Ranthambore","Pushkar Lake","Hawa Mahal","Chittorgarh Fort","Bundi Step Wells","Sam Sand Dunes"],
+          food: ["Dal Baati Churma","Laal Maas","Ghevar","Ker Sangri","Mirchi Bada","Rajasthani Thali"],
+          morning: [
+            "Greet the morning from the ramparts of Mehrangarh Fort in Jodhpur, watching the Blue City slowly wake below you in a dreamlike palette of indigo, cobalt, and sky blue. The fort rises 125 metres above the city on a sheer rock face — its gates still bear the cannonball dents from 18th-century sieges. Inside, seven spectacular palaces showcase carved sandstone screens (jalis) so delicate they resemble lace more than stone, with latticed light falling across ancient weapons and royal palanquins that carried maharajas to their courts.",
+            "Rise before the desert heat to watch the sun illuminate the golden bastions of Jaisalmer Fort, the only fully inhabited fort in the world. The sandstone glows deep amber, then brilliant gold, then almost white as the light climbs. Explore the narrow lanes inside the fort — a living city of 4,000 residents, humming temples, and rooftop cafés with views across the Thar — before the midday temperatures make exploration uncomfortable for anyone who hasn't grown up in the desert.",
+            "Visit Amber Fort in Jaipur in the cool of early morning, when the tour buses haven't yet arrived and you can explore the mirror palace (Sheesh Mahal) in relative peace. A thousand tiny mirrors embedded in the curved ceiling create the illusion of starlight in any candlelight — it was said that a single lamp could light the entire chamber like a full moon. The fort's ramparts overlook Maota Lake below, its still surface reflecting the walls in perfect symmetry.",
+          ],
+          afternoon: [
+            "Take a camel safari into the Thar Desert from Sam Sand Dunes near Jaisalmer, riding through a silent golden landscape that feels both endless and intimate. Your Rajput cameleer will navigate by the angle of dunes and the direction of the wind, stopping at an abandoned Kuldhara village — a ghost town whose 1,500 residents vanished overnight in 1825, leaving behind only legends and eerily intact stone houses with their cooking pots still on the hearths.",
+            "Spend the afternoon exploring the step wells (baoris) of Bundi — among the most architecturally extraordinary structures in India, yet virtually unknown to international tourists. Raniji ki Baori descends sixteen storeys into the earth in a series of decorated terraces, its carved pillars mirrored in the still green water far below. The town of Bundi itself is a masterpiece of traditional Rajput architecture: painted havelis, narrow bazaars, and a palace whose interior murals rival anything in the Mughal world.",
+            "After lunch, explore the lakes and ghats of Pushkar, one of India's most sacred towns and home to the world's only Brahma temple. The 52 bathing ghats surrounding the rose-coloured Pushkar Lake are a meditative spectacle in the soft afternoon light when pilgrims perform rituals and temple bells echo across the water. The bazaar here is famous for tie-and-dye textiles, camel leather goods, silver jewellery, and the famous Pushkar rose water.",
+          ],
+          evening: [
+            "Watch the sunset from Nahargarh Fort above Jaipur — the panoramic view of the Pink City dissolving into haze as the light fails is one of Rajasthan's most breathtaking moments. Stay for a traditional folk performance: Kalbeliya snake-charmer dancers in swirling black skirts, Bhopa-Bhopi ballads accompanied by the ravanhatta fiddle, and fire dancers spinning wheels of flame against the darkening sky. Finish with a traditional Rajasthani thali dinner at a heritage haveli restaurant.",
+            "In Udaipur, take an evening boat ride across Lake Pichola to the illuminated Lake Palace — originally built as a summer pleasure palace for the Maharana in 1746, it appears to float on the lake like a marble dream. The City Palace, glowing gold on the eastern shore, completes the picture. Dine at a rooftop restaurant overlooking the lake, where the reflection of palaces, temples, and mountains shimmers endlessly in the dark water below.",
+          ],
+          tips: [
+            "Book palace hotels (heritage havelis) at least a month ahead in peak season (October–March) — they sell out fast and are often surprisingly affordable at the 3-star tier.",
+            "Hire a local guide for forts — the stories and historical context transform what might seem like ruins into living, breathing history.",
+            "Carry a silk scarf for head and face protection in the desert — sun and sand can be brutal by midday, and it doubles as a temple cover.",
+            "Bargain hard in bazaars but do so with good humour — Rajasthani traders enjoy the exchange and respect a buyer who knows the game.",
+            "The overnight train from Jaipur to Jodhpur to Jaisalmer is scenic and excellent value — book sleeper class for authenticity or AC for comfort.",
+            "Photography is mostly permitted in forts (small camera fee), but always ask respectfully before photographing local people."
+          ]
+        },
+
+        "_default": {
+          emoji: "✈️", theme: "Your Perfect Escape",
+          highlights: ["Local Museum","City Market","Heritage Walk","Nature Reserve","Scenic Viewpoint","Cultural Centre","Local Cuisine Tour","Sunset Point","Historic Quarter","Adventure Hub"],
+          food: ["Local Street Food","Regional Thali","Fresh Seasonal Produce","Traditional Sweets","Artisan Chai","Regional Delicacies"],
+          morning: [
+            "Begin your morning with a leisurely sunrise walk through the heart of the city, when streets are quiet and the light is at its most flattering. This is the best time to notice architectural details that get lost in the bustle of the day — carved doorways, old signage, temple gopurams, and the slow ritual of shopkeepers opening their shutters and arranging their wares with practised care. Stop for a traditional breakfast at a local joint that's been serving the neighbourhood for decades; ask the owner what the regulars order and go with that every single time.",
+            "Start your day with a guided heritage walk through the old quarter, where layers of history lie stacked like geological strata. Your guide will point out buildings that have served as caravanserais, colonial offices, princely residences, and now family apartments — each with stories the guidebooks have missed entirely. Carry a notebook; you'll want to remember the details. Finish at a local chai stall where the morning conversation is as rich as the brew.",
+            "Head to the city's central market early, before the crowds arrive and the heat builds. Morning markets are the truest window into how a place actually lives — what people buy, what they argue about, what they celebrate. Try the seasonal fruits you don't recognise, watch the flower sellers arranging marigold garlands, and listen to the rhythmic calls of vendors announcing their prices in the local language. This hour costs nothing and reveals everything that matters about a place.",
+            "Take a morning nature walk through the outskirts of the city, where the urban edge gives way to farmland, forest, or wetland depending on the region. Hire a local naturalist guide who can identify birds by call and explain the ecology of the landscape with the quiet authority of someone who has walked here every morning for years. These guides typically charge very little and offer extraordinary insight into the natural world that most visitors miss entirely while rushing between monuments.",
+          ],
+          afternoon: [
+            "Spend the afternoon at the local museum — not the grand national institution but the smaller regional one that covers the specific history, craft traditions, and natural heritage of this district. These under-visited gems often contain extraordinary collections: temple bronzes, ancient manuscripts, tribal jewellery, old photographs, and artefacts that tell the story of ordinary life across centuries in ways that national museums never quite manage.",
+            "Take a half-day cooking class with a local family or at a community kitchen project. Learning to cook regional food is the deepest kind of cultural immersion — you learn the names of spices you've never encountered, understand how climate and geography shape flavour, and leave with recipes that will transport you back to this place every time you cook them. The meal at the end, eaten together with your hosts, is invariably the best of the trip.",
+            "Explore the artisan workshops and craft clusters of the city, where traditional skills are passed down through families over generations. Depending on the region, you might find weavers at their hand-looms, potters shaping clay on wheels unchanged since the medieval period, block-print textile artists, brassware makers, or woodcarvers whose tools bear the patina of a hundred years of daily use. Most workshops welcome visitors and are happy to explain their craft; many will let you try.",
+          ],
+          evening: [
+            "Find the best rooftop or viewpoint in the city and claim your spot before sunset. In most Indian cities, this means navigating to a rooftop chai shop, a fort rampart, a riverside ghat, or a hilltop temple. Sit with your chai and watch the city change colour: first golden, then amber, then the particular deep blue that lingers for twenty minutes after the sun vanishes. This is the hour when the city exhales, when the heat eases, and when the street food vendors light their fires for the evening rush.",
+            "Spend the evening at a cultural performance — classical dance, folk music, puppetry, storytelling, or theatre. In most Indian cities, you can find a performance for under ₹200 that would cost ten times as much abroad, performed by artists who have trained for a decade or more. Ask your hotel or a local arts organisation for what's on; many performances are in small community halls or temple courtyards rather than ticketed venues.",
+            "End the day with a long, slow dinner at a restaurant that's clearly feeding locals rather than tourists — the tell is a menu with no photographs, a queue of families at 8 pm, and a waiter who looks slightly surprised to see you. Order the daily special without asking what it is and trust the kitchen completely. This meal, more than any monument or museum, will be what you remember most vividly when you return home.",
+          ],
+          tips: [
+            "Download offline maps before you leave — mobile data can be unreliable in heritage areas, hill stations, and rural surroundings.",
+            "Always carry a reusable water bottle and a light cotton scarf — both are useful in temples, markets, and the afternoon sun.",
+            "Learn five words of the local language: hello, thank you, how much, delicious, and beautiful. The reaction from locals is disproportionately warm and immediate.",
+            "The best restaurants are usually the ones with no English menu and a queue out the door — find them by asking hotel staff where they eat on their days off.",
+            "Book trains and buses at least a week in advance on the IRCTC or RedBus apps — last-minute bookings on popular routes are rarely available at reasonable prices.",
+            "Respect local customs at religious sites: remove shoes, cover heads where required, and ask before photographing worshippers or ceremonies in progress."
+          ]
+        }
+      };
+
+      function getDestinationData() {
+        const dest = (formData.destination || "").toLowerCase();
+        for (const key of Object.keys(destinationData)) {
+          if (key === "_default") continue;
+          if (dest.includes(key.toLowerCase())) return destinationData[key];
+        }
+        return destinationData["_default"];
+      }
+
+      function pick(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      // ─────────────────────────────────────────────
+      // RICH FALLBACK CONTENT (no backend needed)
+      // ─────────────────────────────────────────────
+
+      function generateFallbackContent() {
+        const itineraryContainer = document.getElementById("itineraryDetails");
+        const budgetContainer    = document.getElementById("budgetSummary");
+        const data      = getDestinationData();
+        const dest      = formData.destination || "your destination";
+        const days      = formData.duration    || 3;
+        const travelers = formData.travelers   || 1;
+        const transport = formData.transport   || "flight";
+        const accomRaw  = formData.accommodation || "3star";
+        const accom     = accomRaw.replace("star", "-Star");
+
+        // ── ITINERARY ──
+        let itinHTML = `
+          <div style="background:linear-gradient(135deg,rgba(0,128,128,0.08),rgba(0,160,160,0.04));
+            border-radius:12px;padding:18px 20px;margin-bottom:20px;border-left:4px solid #008080;">
+            <div style="font-size:26px;margin-bottom:6px;">${data.emoji}</div>
+            <div style="font-weight:700;color:#008080;font-size:18px;">${dest} — ${data.theme}</div>
+            <div style="color:#555;margin-top:6px;line-height:1.6;">
+              A carefully curated <strong>${days}-day</strong> journey for
+              <strong>${travelers} traveller${travelers > 1 ? "s" : ""}</strong>,
+              travelling by <strong>${transport}</strong> and staying in
+              <strong>${accom} hotel</strong> accommodation.
+            </div>
+          </div>`;
+
+        const highlights = [...data.highlights].sort(() => Math.random() - 0.5);
+        const dayEmojis  = ["🌍","🗺️","🏛️","🌿","🎭","🛤️","🌅","🎨","🌺","🏔️"];
+
+        for (let i = 1; i <= days; i++) {
+          const isFirst = i === 1;
+          const isLast  = i === days;
+
+          const morningText = isFirst
+            ? `Arrive in ${dest} and check into your ${accom} hotel. Once settled, take a gentle orientation walk through the neighbourhood — find the nearest chai shop, let the atmosphere begin to settle over you. In the late morning, visit ${highlights[i % highlights.length]}, one of ${dest}'s defining sights. ${pick(data.morning)}`
+            : isLast
+            ? `On your final morning, rise early and revisit your single favourite place from the trip. Mornings have a different quality when you know you're leaving; things you've already seen reveal new details. ${pick(data.morning)} Pack up at leisure, store your bags at the hotel, and make the most of your last few hours.`
+            : pick(data.morning);
+
+          const afternoonText = isFirst
+            ? `After freshening up, head out for your first proper exploration of ${dest}. Visit ${highlights[(i + 2) % highlights.length]} and let yourself get wonderfully lost. ${pick(data.afternoon)}`
+            : isLast
+            ? `Spend your last afternoon doing whatever you didn't get around to earlier — that craft shop you walked past, the street food stall you kept promising yourself. ${pick(data.afternoon)} Allow plenty of buffer time before heading to the airport or station.`
+            : pick(data.afternoon);
+
+          const eveningText = isFirst
+            ? `Your first evening in ${dest} sets the tone for everything that follows. Find a well-regarded local restaurant and try the regional specialties: ${data.food.slice(0,3).join(", ")}. ${pick(data.evening)} Sleep early; tomorrow begins in earnest.`
+            : isLast
+            ? `Your final evening deserves celebration. ${pick(data.evening)} Try dishes you haven't yet sampled, like ${data.food.slice(-3).join(" or ")}. Linger over dinner, exchange contacts with anyone you've met, and spend some time simply sitting with the experience of this place before tomorrow's journey home.`
+            : pick(data.evening);
+
+          itinHTML += `
+            <div class="day-item" style="margin-bottom:20px;">
+              <h4 style="color:#008080;margin:0 0 14px 0;font-size:17px;
+                display:flex;align-items:center;gap:10px;
+                border-bottom:2px solid rgba(0,128,128,0.15);padding-bottom:10px;">
+                <span style="background:rgba(0,128,128,0.1);padding:4px 12px;border-radius:20px;font-size:13px;">
+                  Day ${i} of ${days}
+                </span>
+                ${dayEmojis[(i-1) % dayEmojis.length]}
+                ${isFirst ? "Arrival & First Impressions" : isLast ? "Farewell & Departure" : `Exploring ${highlights[(i+1) % highlights.length]}`}
+              </h4>
+              <div style="margin-bottom:14px;">
+                <div style="font-weight:700;color:#005f5f;font-size:14px;margin-bottom:6px;">🌅 Morning</div>
+                <p style="margin:0;line-height:1.85;color:#333;">${morningText}</p>
+              </div>
+              <div style="margin-bottom:14px;">
+                <div style="font-weight:700;color:#005f5f;font-size:14px;margin-bottom:6px;">🌞 Afternoon</div>
+                <p style="margin:0;line-height:1.85;color:#333;">${afternoonText}</p>
+              </div>
+              <div>
+                <div style="font-weight:700;color:#005f5f;font-size:14px;margin-bottom:6px;">🌙 Evening</div>
+                <p style="margin:0;line-height:1.85;color:#333;">${eveningText}</p>
+              </div>
+            </div>`;
+        }
+
+        // Travel tips section
+        itinHTML += `
+          <div style="background:rgba(0,128,128,0.06);border-radius:12px;padding:20px;
+            margin-top:10px;border:1px solid rgba(0,128,128,0.15);">
+            <div style="font-weight:700;color:#008080;font-size:16px;margin-bottom:14px;">💡 Local Travel Tips for ${dest}</div>
+            ${data.tips.map((tip, idx) => `
+              <div style="display:flex;gap:12px;margin-bottom:10px;align-items:flex-start;">
+                <span style="background:#008080;color:white;border-radius:50%;min-width:24px;height:24px;
+                  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;margin-top:2px;">
+                  ${idx+1}
+                </span>
+                <p style="margin:0;line-height:1.7;color:#333;">${tip}</p>
+              </div>`).join("")}
+            <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(0,128,128,0.15);
+              color:#555;font-size:14px;line-height:1.6;">
+              <strong>Must-try food & drinks:</strong> ${data.food.join(" · ")}
+            </div>
+          </div>`;
+
+        itineraryContainer.innerHTML = itinHTML;
+
+        // ── BUDGET ──
+        const budget    = calculateBudget();
+        const perPerson = Math.round(budget.total / travelers);
+        const nightlyRate = Math.round(budget.accommodation / days / travelers);
+        const transportNames = { flight:"Round-trip Airfare", train:"Round-trip Train Tickets", bus:"Round-trip Bus Tickets" };
+        const accomNames     = { "5star":"Luxury (5-Star)", "4star":"Premium (4-Star)", "3star":"Comfortable (3-Star)" };
+        const mealDesc  = formData.meals.length ? formData.meals.join(", ") : "Self-arranged";
+        const miscCost  = Math.round(budget.total * 0.08);
+        const localCost = Math.round(budget.total * 0.07);
+
+        const rows = [
+          { icon:"✈️", label: transportNames[transport] || "Transport",
+            amount: budget.transport,
+            note: `Estimated round-trip cost for ${travelers} traveller${travelers>1?"s":""}.  Booking 3–4 weeks in advance on MakeMyTrip or Ixigo can reduce this by 20–35%.` },
+          { icon:"🏨", label: `${accomNames[accomRaw]||accom} Hotel — ${days} nights`,
+            amount: budget.accommodation,
+            note: `${days} nights × ₹${nightlyRate.toLocaleString()}/night/person × ${travelers} person${travelers>1?"s":""}. ${accomRaw==="5star"?"Includes complimentary breakfast, spa access, and airport transfers at most properties.":accomRaw==="4star"?"Most properties include breakfast and have on-site dining.":"Good value — clean rooms, Wi-Fi, and room service."}` },
+          { icon:"🍽️", label: `Meals — ${mealDesc}`,
+            amount: budget.meals,
+            note: formData.meals.length
+              ? `Covers ${mealDesc} for all ${days} days × ${travelers} traveller${travelers>1?"s":""}. Eating at local dhabas instead of hotel restaurants can reduce this by 40–50%.`
+              : `Meals are self-arranged. Budget approx. ₹500–800/person/day for casual local dining, or ₹1,500–3,000 for restaurant meals.` },
+          { icon:"🎯", label: "Activities & Sightseeing",
+            amount: budget.activities,
+            note: `Covers entry fees, guided tours, adventure activities, and cultural experiences across all ${days} days. Mix paid and free attractions to stay within budget.` },
+          { icon:"🛺", label: "Local Transport",
+            amount: localCost,
+            note: `Auto-rickshaws, cabs, local buses, and short-distance travel within ${dest}. Download Ola and Rapido before you leave home for the best rates.` },
+          { icon:"🛍️", label: "Shopping & Miscellaneous",
+            amount: miscCost,
+            note: `Buffer for souvenirs, unexpected fees, tips, and unplanned expenses. Always keep a 10–15% buffer — India is full of wonderful unplanned costs.` },
+        ];
+
+        const grandTotal = rows.reduce((s, r) => s + r.amount, 0);
+
+        let budgetHTML = `
+          <div style="background:linear-gradient(135deg,rgba(0,128,128,0.08),transparent);
+            border-radius:12px;padding:18px 20px;margin-bottom:20px;border-left:4px solid #008080;">
+            <div style="font-weight:700;color:#008080;font-size:16px;">Budget Overview</div>
+            <div style="color:#555;margin-top:6px;line-height:1.6;">
+              Estimated costs for <strong>${travelers} traveller${travelers>1?"s":""}</strong> on a
+              <strong>${days}-day trip</strong> to <strong>${dest}</strong> with
+              <strong>${accomNames[accomRaw]||accom}</strong> accommodation and
+              <strong>${transportNames[transport]||"transport"}</strong>.
+              All figures in Indian Rupees (₹), realistic 2024–25 estimates.
+            </div>
+          </div>`;
+
+        rows.forEach(row => {
+          budgetHTML += `
+            <div style="background:white;border:1px solid #e9ecef;border-radius:12px;
+              padding:16px 18px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <div style="font-weight:700;color:#333;font-size:15px;">${row.icon} ${row.label}</div>
+                <div style="font-weight:700;color:#008080;font-size:17px;white-space:nowrap;">₹${row.amount.toLocaleString()}</div>
+              </div>
+              <div style="color:#666;font-size:13px;line-height:1.65;">${row.note}</div>
+              ${travelers > 1 ? `<div style="margin-top:6px;color:#999;font-size:12px;">Per person: ₹${Math.round(row.amount/travelers).toLocaleString()}</div>` : ""}
+            </div>`;
+        });
+
+        budgetHTML += `
+          <div style="background:linear-gradient(135deg,#008080,#00a0a0);border-radius:12px;
+            padding:20px 22px;margin-top:8px;color:white;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+              <div>
+                <div style="font-size:18px;font-weight:700;">💰 Total Estimated Budget</div>
+                <div style="opacity:0.85;font-size:13px;margin-top:3px;">
+                  All-inclusive estimate for ${travelers} traveller${travelers>1?"s":""}
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:30px;font-weight:700;">₹${grandTotal.toLocaleString()}</div>
+                <div style="opacity:0.85;font-size:13px;">≈ ₹${perPerson.toLocaleString()} per person</div>
+              </div>
+            </div>
+            <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.25);
+              font-size:13px;opacity:0.9;line-height:1.65;">
+              <strong>💡 Saving tip:</strong> Book flights and hotels together on MakeMyTrip or Yatra
+              for package discounts of 12–18%. Travelling on weekdays can reduce accommodation costs by 20–30%.
+            </div>
+          </div>`;
+
+        budgetContainer.innerHTML = budgetHTML;
+      }
+
+      // ─────────────────────────────────────────────
+      // BOOKING
+      // ─────────────────────────────────────────────
+
+      function bookTrip() {
+        const user = JSON.parse(localStorage.getItem("user") || "null");
+        if (!user) { window.location.href = "login.html"; return; }
+        const budget = calculateBudget();
+        window.showBookingModal({
+          id:       `TOUR${Date.now()}`,
+          type:     "tour",
+          title:    formData.destination + " Trip",
+          from:     formData.origin || "",
+          to:       formData.destination,
+          date:     formData.startDate || new Date().toISOString().split("T")[0],
+          price:    `₹${budget.total.toLocaleString()}`,
+          travelers: formData.travelers || 1
+        });
+      }
+
+      function confirmBooking() {
+        const budget    = calculateBudget();
+        const bookingId = `TRIP${Date.now()}`;
+        document.getElementById("bookingView").style.display    = "none";
+        document.getElementById("successView").style.display    = "block";
+        document.getElementById("bookingId").innerText          = bookingId;
+        document.getElementById("successDestination").innerText = formData.destination;
+        document.getElementById("successDuration").innerText    = formData.duration + " days";
+        document.getElementById("successCost").innerText        = budget.total.toLocaleString();
+      }
+
+      function closeModal() {
+        document.getElementById("bookingModal").style.display = "none";
+      }
+
       async function testBackendConnection() {
         try {
-          const response = await fetch(`${API_BASE_URL}/health`);
-          if (response.ok) {
-            console.log("✅ Backend connection successful");
-          } else {
-            console.warn("⚠️ Backend responded but with error status");
-          }
-        } catch (error) {
-          console.error("❌ Backend connection failed:", error);
-          console.log("Make sure to start the Flask server first!");
-        }
+          const r = await fetch(`${API_BASE_URL}/health`);
+          console.log(r.ok ? "✅ Backend connected" : "⚠️ Backend error");
+        } catch { console.log("❌ No backend — using local content"); }
       }
 
       document.addEventListener("DOMContentLoaded", function () {
         showStep(1);
-
-        const today = new Date().toISOString().split("T")[0];
-        document.getElementById("startDate").min = today;
-
+        document.getElementById("startDate").min = new Date().toISOString().split("T")[0];
         testBackendConnection();
       });
-     function confirmBooking() {
-    const budget = calculateBudget();
-    const bookingId = `TRIP${Date.now()}`;
-
-    // hide booking view
-    document.getElementById("bookingView").style.display = "none";
-
-    // show success view
-    document.getElementById("successView").style.display = "block";
-
-    // fill dynamic data
-    document.getElementById("bookingId").innerText = bookingId;
-    document.getElementById("successDestination").innerText = formData.destination;
-    document.getElementById("successDuration").innerText = formData.duration + " days";
-    document.getElementById("successCost").innerText = budget.total.toLocaleString();
-}
-function closeModal() {
-    document.getElementById("bookingModal").style.display = "none";
-}
     </script>
- 
 
-<div id="bookingModal" style="
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-z-index:1000;
-display:none;
-align-items:center;
-justify-content:center;
-">
-
-  <div style="
-    background:white;
-    width:500px;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 20px 40px rgba(0,0,0,0.2);
-  ">
-
-    <!-- HEADER -->
-    <div style="
-      background:linear-gradient(135deg,#008080,#00a0a0);
-      color:white;
-      padding:20px;
-      font-size:20px;
-      font-weight:bold;
-    ">
-      Complete Your Booking
-    </div>
-
-    <!-- BODY -->
-    <div style="padding:25px;" id="modalContent">
-
-      <!-- Booking View -->
-      <div id="bookingView">
-        <p><b>Destination:</b> <span id="modalDestination"></span></p>
-        <p><b>Duration:</b> <span id="modalDuration"></span></p>
-
-        <div style="margin-top:20px; display:flex; gap:15px;">
-          <button class="btn btn-primary" onclick="confirmBooking()">
-            Confirm Booking
-          </button>
-
-          <button class="btn btn-secondary" onclick="closeModal()">
-            Cancel
-          </button>
+    <!-- Booking Modal -->
+    <div id="bookingModal" style="position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.5);z-index:1000;display:none;align-items:center;justify-content:center;">
+      <div style="background:white;width:500px;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.2);">
+        <div style="background:linear-gradient(135deg,#008080,#00a0a0);color:white;padding:20px;font-size:20px;font-weight:bold;">
+          Complete Your Booking
+        </div>
+        <div style="padding:25px;" id="modalContent">
+          <div id="bookingView">
+            <p><b>Destination:</b> <span id="modalDestination"></span></p>
+            <p><b>Duration:</b> <span id="modalDuration"></span></p>
+            <div style="margin-top:20px;display:flex;gap:15px;">
+              <button class="btn btn-primary" onclick="confirmBooking()">Confirm Booking</button>
+              <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+            </div>
+          </div>
+          <div id="successView" style="display:none;text-align:center;">
+            <h2 style="color:#008080;">🎉 Trip Booked Successfully!</h2>
+            <p><b>Booking ID:</b> <span id="bookingId"></span></p>
+            <p><b>Destination:</b> <span id="successDestination"></span></p>
+            <p><b>Duration:</b> <span id="successDuration"></span></p>
+            <p><b>Total Cost:</b> ₹<span id="successCost"></span></p>
+            <button class="btn btn-primary" onclick="closeModal()" style="margin-top:20px;">OK</button>
+          </div>
         </div>
       </div>
-
-      <!-- Success View -->
-      <div id="successView" style="display:none; text-align:center;">
-        <h2 style="color:#008080;">🎉 Trip Booked Successfully!</h2>
-
-        <p><b>Booking ID:</b> <span id="bookingId"></span></p>
-        <p><b>Destination:</b> <span id="successDestination"></span></p>
-        <p><b>Duration:</b> <span id="successDuration"></span></p>
-        <p><b>Total Cost:</b> ₹<span id="successCost"></span></p>
-
-        <button class="btn btn-primary" onclick="closeModal()" style="margin-top:20px;">
-          OK
-        </button>
-      </div>
-
     </div>
-  </div>
-</div>
-  <script src="/js/booking-modal.js"></script>
+
+    <script src="/js/booking-modal.js"></script>
   </body>
 </html>

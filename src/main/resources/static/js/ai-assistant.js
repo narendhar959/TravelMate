@@ -416,7 +416,7 @@
                 this.removeTyping();
                 this.addMessage(
                     "assistant",
-                    "I could not reach the AI service. Please make sure the separate Ollama assistant backend is running on port 5001."
+                    "I could not reach the AI service. Please try again."
                 );
             } finally {
                 this.isLoading = false;
